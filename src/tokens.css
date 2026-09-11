@@ -14,8 +14,9 @@
    warm MP213 paper it was built on and swaps the accent for something that
    works on it.
 
-     acid lime     #E3FF4F   the one accent
+     white         #FFFFFF   the one accent
      near-black    #0B0B0C   ground
+     violet        #6C3BFF   brand, used sparingly and never on a control
      picket fence  #F3F2EA   the light ground
 
    Two accents still carry MEANING rather than decoration:
@@ -43,12 +44,22 @@
   --le-rule-soft:  #1B1B20;
 
   /* ── the accent ────────────────────────────────────────────────────────
-     One colour, used for the single most important action on any screen.
-     Acid lime against near-black is about as loud as a colour gets, which is
-     exactly why nothing else may use it — a second element wearing it halves
-     the meaning of the first. */
-  --le-highlight:    #E3FF4F;
+     White. On a near-black ground nothing is louder, and unlike a colour it
+     never argues with a photograph — which matters when the screen below it is
+     a wall of other people's images.
+
+     A bright accent seemed like the punchy choice and was the wrong one: acid
+     lime on black reads as a warning, clashes with half the covers, and is not
+     how this kind of app actually looks. The restraint IS the style.
+
+     Violet is the brand mark and nothing else. It never appears on a control,
+     because a colour that means "us" cannot also mean "press this". */
+  --le-highlight:    #FFFFFF;
   --le-on-highlight: #0B0B0C;
+  /* Legible as text as well as usable as a logo fill. #6C3BFF is the truer
+     brand violet but only reaches 3.5:1 on this ground, and a token that is
+     safe in one use and unreadable in another gets used wrong eventually. */
+  --le-brand:        #8B63FF;
 
   /* ── category accents ──────────────────────────────────────────────────
      These say WHAT something is, so they must be told apart at a glance and
@@ -160,6 +171,7 @@
 
     --le-highlight:    #FFFB08;
     --le-on-highlight: #09324A;
+    --le-brand:        #4B23C9;
 
     --le-com:        #1B6F81;
     --le-com-soft:   #E2EFF1;
@@ -225,6 +237,7 @@
 
   --le-highlight:    #FFFB08;
   --le-on-highlight: #09324A;
+  --le-brand:        #4B23C9;
 
   --le-com:        #1B6F81;
   --le-com-soft:   #E2EFF1;
@@ -282,8 +295,12 @@
   --le-rule:       #27272E;
   --le-rule-soft:  #1B1B20;
 
-  --le-highlight:    #E3FF4F;
+  --le-highlight:    #FFFFFF;
   --le-on-highlight: #0B0B0C;
+  /* Legible as text as well as usable as a logo fill. #6C3BFF is the truer
+     brand violet but only reaches 3.5:1 on this ground, and a token that is
+     safe in one use and unreadable in another gets used wrong eventually. */
+  --le-brand:        #8B63FF;
 
   --le-com:        #7FD8FF;
   --le-com-soft:   #10222C;
