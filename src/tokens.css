@@ -1,106 +1,258 @@
 /* ============================================================
-   Design tokens — MP213 palette.
+   Design tokens.
 
-     Picket Fence  #F3F2EA    Fennec Fox    #DAD7C8
-     Cassiopeia    #AED0C9    Billabong     #1B6F81
-     Halite Blue   #09324A    Banana King   #FFFB08
+   DARK FIRST. The ground is near-black, the type is white, and colour comes
+   almost entirely from photographs and generated covers. One accent does the
+   work of every call to action; everything else is a neutral.
 
-   The two accents carry MEANING, not decoration:
-     Billabong (teal) = individual / community
-     Halite   (navy)  = business / venue
+   That restraint is the whole idea. A feed is a wall of other people's images,
+   and every colour the interface adds is a colour competing with them. Give
+   the chrome one voice and the content keeps its own.
+
+   Light is a full second theme, not an inversion. Inverting a dark palette
+   produces muddy greys and an accent that glares, so the light side keeps the
+   warm MP213 paper it was built on and swaps the accent for something that
+   works on it.
+
+     acid lime     #E3FF4F   the one accent
+     near-black    #0B0B0C   ground
+     picket fence  #F3F2EA   the light ground
+
+   Two accents still carry MEANING rather than decoration:
+     com  = individual / community
+     biz  = business / venue
    ============================================================ */
 
 :root {
-  /* grounds */
-  --le-paper:      #F3F2EA;   /* Picket Fence */
-  --le-surface:    #FBFAF4;   /* Picket Fence, lifted */
-  --le-sunken:     #DAD7C8;   /* Fennec Fox */
+  /* ── grounds ───────────────────────────────────────────────────────────
+     Not pure black. #000 makes every shadow invisible and every edge hard,
+     and on OLED it smears when you scroll. A hair above it keeps depth. */
+  --le-paper:      #0B0B0C;
+  --le-surface:    #151518;   /* cards, sheets */
+  --le-sunken:     #070708;   /* wells, inputs */
 
-  /* text — Halite Blue reads as near-black but stays in-palette */
-  --le-ink:        #09324A;
-  --le-ink-2:      #3C5A6D;
-  --le-ink-3:      #6B8493;
+  /* ── ink ───────────────────────────────────────────────────────────────
+     Full white for the thing you are reading; two greys below it. Both greys
+     are very slightly cool so they sit with the ground rather than looking
+     like dirty white. */
+  --le-ink:        #FFFFFF;
+  --le-ink-2:      #A6A6AF;   /* secondary text — 7.4:1 on the ground */
+  --le-ink-3:      #82828C;   /* labels, timestamps — 5.2:1 on ground, 4.8:1 on cards */
 
-  --le-rule:       #DAD7C8;   /* Fennec Fox */
-  --le-rule-soft:  #E8E6DB;
+  --le-rule:       #27272E;
+  --le-rule-soft:  #1B1B20;
 
-  /* meaning */
-  --le-com:        #1B6F81;   /* Billabong — individual / community */
-  --le-com-soft:   #E2EFF1;
-  --le-biz:        #09324A;   /* Halite Blue — business / venue */
-  --le-biz-soft:   #DEE7ED;
+  /* ── the accent ────────────────────────────────────────────────────────
+     One colour, used for the single most important action on any screen.
+     Acid lime against near-black is about as loud as a colour gets, which is
+     exactly why nothing else may use it — a second element wearing it halves
+     the meaning of the first. */
+  --le-highlight:    #E3FF4F;
+  --le-on-highlight: #0B0B0C;
 
-  /* status */
-  --le-good:       #2C7A6B;
-  /* Verification green — its own token, not --le-good.
-     --le-good is the palette's muted teal for general success; this one has a
-     single job and must be seen at 13px on a card. Semantic colours sit
-     outside the brand accent, which is why a true green is allowed here and
-     nowhere else.
+  /* ── category accents ──────────────────────────────────────────────────
+     These say WHAT something is, so they must be told apart at a glance and
+     at badge size. Cyan and amber sit far enough apart in hue to survive
+     both. The -soft pairs are grounds for tinted pills, mixed from the accent
+     so they stay related to it rather than being invented greys. */
+  --le-com:        #7FD8FF;
+  --le-com-soft:   #10222C;
+  --le-biz:        #FFB27F;
+  --le-biz-soft:   #2A1C12;
 
-     TWO values, because one cannot do both jobs on a cream ground:
-       -seal  the bright green people read as "verified" — a filled shape, so
-              it only needs 3:1, and it carries the brightness
-       -ink   the darker green for the word and the border, which is small
-              bold text and needs 4.5:1. #16A34A managed only 2.93:1 on Picket
-              Fence and was genuinely hard to read.                          */
-  --le-verified: #15883E;
-  --le-verified-seal: #16A34A;
-  --le-good-soft:  #AED0C9;   /* Cassiopeia */
-  --le-warn:       #6B5A00;   /* readable text tone for Banana King */
-  --le-warn-soft:  #FFFDBF;   /* Banana King, softened */
+  /* ── verification ──────────────────────────────────────────────────────
+     Bright green with DARK text on it. White on a green this bright fails
+     contrast badly, and the badge is the one element on the page somebody
+     squints at before deciding whether to let a stranger into their house. */
+  --le-verified:    #2BD46E;
+  --le-on-verified: #05270F;
 
-  /* the loud one — reserve for genuine attention, never body text */
-  --le-highlight:  #FFFB08;   /* Banana King */
+  --le-good:       #2BD46E;
+  --le-good-soft:  #0E2A1A;
 
-  /* Text on Banana King. Must stay Halite in BOTH themes — the button is
-     always yellow, so it never follows --le-ink. White on #FFFB08 is
-     unreadable; Halite on it is ~19:1. */
-  --le-on-highlight: #09324A;
+  --le-warn:       #FFD84D;
+  --le-warn-soft:  #2A2410;
 
-  /* MP213 has no red, but destructive actions need one. A brick that sits with
-     the teal and cream rather than Bootstrap's #c0392b, which reads borrowed. */
-  --le-danger:      #A8372B;
-  --le-danger-soft: #F6E3DF;
+  --le-danger:      #FF6B5E;
+  --le-danger-soft: #2B1413;
 
+  /* ── semantic aliases ──────────────────────────────────────────────────
+     The same colours under the names components actually reach for. These
+     were missing, so every component written recently fell back to hardcoded
+     hex values and sat outside the palette entirely — which is why they could
+     not be re-themed at all. */
+  --le-bg:        var(--le-paper);
+  --le-fg:        var(--le-ink);
+  --le-muted:     var(--le-ink-3);
+  --le-line:      var(--le-rule);
+  --le-accent:    var(--le-highlight);
+  --le-on-accent: var(--le-on-highlight);
 
-  /* Two variable faces, self-hosted. See host/public/fonts/fonts.css.
-     Display carries the personality; the UI face stays quiet so it can be read
-     at 13px on a phone in daylight. Both fall back to the system stack, so a
-     failed font request degrades rather than breaks. */
+  /* ── type ──────────────────────────────────────────────────────────────── */
   --le-display: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
   --le-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --le-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  /* Tracking. Display type needs negative tracking to stop large words looking
-     loose; small uppercase labels need positive, or they set solid. */
-  --le-track-display: -0.035em;
-  --le-track-tight: -0.02em;
+  /* Tighter than the light theme was. White on black looks looser than black
+     on white at the same tracking — the letters bloom — so display type is
+     pulled in to compensate. */
+  --le-track-display: -0.04em;
+  --le-track-tight: -0.022em;
   --le-track-label: 0.08em;
 
   --le-r-sm: 8px;
   --le-r-md: 12px;
   --le-r-pill: 100px;
 
-  /* Two layers: a tight contact shadow so the edge reads, and a wide soft one
-     for lift. A single mid-blur shadow is what makes a card look like a 2015
-     card. */
+  /* ── depth ─────────────────────────────────────────────────────────────
+     On a dark ground a shadow cannot be seen, so lift comes from the surface
+     being lighter than the ground and from a hairline edge. The shadows stay
+     defined, deeper and softer, for the few places something floats over
+     content — a sheet, a dialog. */
+  --le-shadow: 0 1px 2px rgba(0, 0, 0, 0.6),
+               0 10px 30px -12px rgba(0, 0, 0, 0.8);
+
+  --le-glass:        color-mix(in srgb, var(--le-paper) 72%, transparent);
+  --le-glass-strong: color-mix(in srgb, var(--le-paper) 86%, transparent);
+  --le-blur:         blur(44px) saturate(150%);
+  --le-blur-sm:      blur(20px) saturate(135%);
+
+  /* A faint top edge, not a gloss. The bright specular sheen that reads as
+     glass on a pale surface reads as a smear on a dark one. */
+  --le-sheen: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.02) 30%,
+    rgba(255, 255, 255, 0.00) 60%
+  );
+
+  --le-r-sheet: 28px;
+  --le-r-card:  16px;
+
+  --le-shadow-sheet: 0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+                     0 -22px 60px rgba(0, 0, 0, 0.55);
+  --le-shadow-card:  0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+                     0 6px 24px -14px rgba(0, 0, 0, 0.7);
+}
+
+/* ── light ────────────────────────────────────────────────────────────────
+   A designed second theme rather than an inversion. The warm MP213 paper is
+   kept, and the accent changes entirely: acid lime on cream is illegible, so
+   the light theme's loudest colour is Banana King, which is what that palette
+   was built around.
+
+   Applied for anyone whose system asks for light and who has not chosen
+   otherwise; the explicit toggle below overrides it in both directions.
+   ───────────────────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --le-paper:      #F3F2EA;
+    --le-surface:    #FBFAF4;
+    --le-sunken:     #DAD7C8;
+
+    --le-ink:        #09324A;
+    --le-ink-2:      #3C5A6D;
+    --le-ink-3:      #57707F;   /* 4.6:1 on paper. #6B8493 was 3.5:1 — it had never passed. */
+
+    --le-rule:       #DAD7C8;
+    --le-rule-soft:  #E8E6DB;
+
+    --le-highlight:    #FFFB08;
+    --le-on-highlight: #09324A;
+
+    --le-com:        #1B6F81;
+    --le-com-soft:   #E2EFF1;
+    --le-biz:        #09324A;
+    --le-biz-soft:   #DEE7ED;
+
+    --le-verified:    #15883E;
+    --le-on-verified: #FFFFFF;
+
+    --le-good:       #2C7A6B;
+    --le-good-soft:  #AED0C9;
+    --le-warn:       #6B5A00;
+    --le-warn-soft:  #FFFDBF;
+    --le-danger:      #A8372B;
+    --le-danger-soft: #F6E3DF;
+
+    /* The primary action is the ink itself here. Banana King is a highlight,
+       not a button — a full-width yellow button on cream has no contrast for
+       its own label. */
+    --le-accent:    var(--le-ink);
+    --le-on-accent: var(--le-paper);
+
+    --le-track-display: -0.035em;
+    --le-track-tight: -0.02em;
+
+    --le-shadow: 0 1px 2px rgba(9, 50, 74, 0.05),
+                 0 8px 24px -10px rgba(9, 50, 74, 0.18);
+
+    --le-blur:    blur(44px) saturate(190%) brightness(1.06);
+    --le-blur-sm: blur(20px) saturate(165%) brightness(1.04);
+
+    --le-sheen: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.42) 0%,
+      rgba(255, 255, 255, 0.10) 22%,
+      rgba(255, 255, 255, 0.00) 55%
+    );
+
+    --le-shadow-sheet: 0 1px 0 rgba(255, 255, 255, 0.75) inset,
+                       0 0 0 1px rgba(255, 255, 255, 0.22) inset,
+                       0 -22px 50px rgba(4, 27, 40, 0.20);
+    --le-shadow-card:  0 1px 0 rgba(255, 255, 255, 0.65) inset,
+                       0 0 0 1px rgba(255, 255, 255, 0.18) inset,
+                       0 6px 20px -12px rgba(4, 27, 40, 0.22);
+  }
+}
+
+/* Explicit choice. Both directions are spelled out so the toggle beats the
+   media query whichever way the system happens to be set — a theme control
+   that only works one way is worse than none. */
+
+:root[data-theme="light"] {
+  --le-paper:      #F3F2EA;
+  --le-surface:    #FBFAF4;
+  --le-sunken:     #DAD7C8;
+
+  --le-ink:        #09324A;
+  --le-ink-2:      #3C5A6D;
+  --le-ink-3:      #57707F;   /* 4.6:1 on paper. #6B8493 was 3.5:1 — it had never passed. */
+
+  --le-rule:       #DAD7C8;
+  --le-rule-soft:  #E8E6DB;
+
+  --le-highlight:    #FFFB08;
+  --le-on-highlight: #09324A;
+
+  --le-com:        #1B6F81;
+  --le-com-soft:   #E2EFF1;
+  --le-biz:        #09324A;
+  --le-biz-soft:   #DEE7ED;
+
+  --le-verified:    #15883E;
+  --le-on-verified: #FFFFFF;
+
+  --le-good:       #2C7A6B;
+  --le-good-soft:  #AED0C9;
+  --le-warn:       #6B5A00;
+  --le-warn-soft:  #FFFDBF;
+  --le-danger:      #A8372B;
+  --le-danger-soft: #F6E3DF;
+
+  --le-accent:    var(--le-ink);
+  --le-on-accent: var(--le-paper);
+
+  --le-track-display: -0.035em;
+  --le-track-tight: -0.02em;
+
   --le-shadow: 0 1px 2px rgba(9, 50, 74, 0.05),
                0 8px 24px -10px rgba(9, 50, 74, 0.18);
 
-  /* ── surfaces ──────────────────────────────────────────────────────────
-     Shared by the shell AND every fragment, so the whole app reads as one
-     surface system. Fragments must use these rather than inventing panels. */
+  --le-blur:    blur(44px) saturate(190%) brightness(1.06);
+  --le-blur-sm: blur(20px) saturate(165%) brightness(1.04);
 
-  --le-glass:        color-mix(in srgb, var(--le-paper) 58%, transparent);
-  --le-glass-strong: color-mix(in srgb, var(--le-paper) 74%, transparent);
-  --le-blur:         blur(44px) saturate(190%) brightness(1.06);
-  --le-blur-sm:      blur(20px) saturate(165%) brightness(1.04);
-
-
-  /* Specular sheen — layered over a glass surface's own background so light
-     appears to catch the top edge. This is what separates "glass" from
-     "translucent panel". */
   --le-sheen: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0.42) 0%,
@@ -108,174 +260,75 @@
     rgba(255, 255, 255, 0.00) 55%
   );
 
-  --le-r-sheet: 28px;      /* a sheet lifted over content */
-  --le-r-card:  16px;      /* cards inside a sheet */
-
   --le-shadow-sheet: 0 1px 0 rgba(255, 255, 255, 0.75) inset,
                      0 0 0 1px rgba(255, 255, 255, 0.22) inset,
                      0 -22px 50px rgba(4, 27, 40, 0.20);
   --le-shadow-card:  0 1px 0 rgba(255, 255, 255, 0.65) inset,
                      0 0 0 1px rgba(255, 255, 255, 0.18) inset,
-                     0 8px 24px rgba(9, 50, 74, 0.10);
+                     0 6px 20px -12px rgba(4, 27, 40, 0.22);
 }
 
-/* ── dark ─────────────────────────────────────────────────────────────────
-   Halite Blue becomes the ground; Picket Fence becomes the ink. The accents
-   lighten so they stay legible on a dark navy field.                        */
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --le-paper:     #062435;
-    --le-surface:   #09324A;   /* Halite Blue */
-    --le-sunken:    #041B28;
-    --le-ink:       #F3F2EA;   /* Picket Fence */
-    --le-ink-2:     #BFCCD3;
-    --le-ink-3:     #859AA6;
-    --le-rule:      #16465F;
-    --le-rule-soft: #0E3A51;
-
-    --le-com:       #6FC3D2;
-    --le-com-soft:  #0D3F4B;
-    --le-biz:       #AED0C9;   /* Cassiopeia reads as the business tone here */
-    --le-biz-soft:  #0B3B45;
-
-    --le-good:      #AED0C9;
-  /* Verification green. Brighter than --le-good, and deliberately its own
-     token: --le-good is the palette's muted teal for general success, while
-     this one has a single job and has to be seen at 13px on a card. Semantic
-     colours sit outside the brand accent, which is why a bright green is
-     allowed here and nowhere else. */
-  --le-verified: #34D399;
-  --le-verified-seal: #34D399;
-    --le-good-soft: #10403A;
-    --le-warn:      #FFFB08;   /* Banana King */
-    --le-warn-soft: #3A3600;
-
-    --le-highlight: #FFFB08;
-
-  --le-on-highlight: #09324A;
-  --le-danger:       #E8796B;
-  --le-danger-soft:  #3A1A15;
-
-
-    --le-shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
-
-  --le-glass:        color-mix(in srgb, var(--le-paper) 52%, transparent);
-  --le-glass-strong: color-mix(in srgb, var(--le-paper) 70%, transparent);
-  --le-shadow-sheet: 0 1px 0 rgba(255, 255, 255, 0.16) inset,
-                     0 0 0 1px rgba(255, 255, 255, 0.07) inset,
-                     0 -22px 50px rgba(0, 0, 0, 0.45);
-  --le-shadow-card:  0 1px 0 rgba(255, 255, 255, 0.13) inset,
-                     0 0 0 1px rgba(255, 255, 255, 0.06) inset,
-                     0 8px 24px rgba(0, 0, 0, 0.32);
-  }
-}
-
+/* Dark chosen explicitly. Identical to :root, and repeated so it wins back
+   over the light media query on a system set to light. */
 :root[data-theme="dark"] {
-  --le-paper:     #062435;
-  --le-surface:   #09324A;
-  --le-sunken:    #041B28;
-  --le-ink:       #F3F2EA;
-  --le-ink-2:     #BFCCD3;
-  --le-ink-3:     #859AA6;
-  --le-rule:      #16465F;
-  --le-rule-soft: #0E3A51;
-  --le-com:       #6FC3D2;
-  --le-com-soft:  #0D3F4B;
-  --le-biz:       #AED0C9;
-  --le-biz-soft:  #0B3B45;
-  --le-good:      #AED0C9;
-  /* Verification green. Brighter than --le-good, and deliberately its own
-     token: --le-good is the palette's muted teal for general success, while
-     this one has a single job and has to be seen at 13px on a card. Semantic
-     colours sit outside the brand accent, which is why a bright green is
-     allowed here and nowhere else. */
-  --le-verified: #34D399;
-  --le-verified-seal: #34D399;
-  --le-good-soft: #10403A;
-  --le-warn:      #FFFB08;
-  --le-warn-soft: #3A3600;
-  --le-highlight: #FFFB08;
+  --le-paper:      #0B0B0C;
+  --le-surface:    #151518;
+  --le-sunken:     #070708;
 
-  --le-on-highlight: #09324A;
-  --le-danger:       #E8796B;
-  --le-danger-soft:  #3A1A15;
-  --le-shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --le-ink:        #FFFFFF;
+  --le-ink-2:      #A6A6AF;
+  --le-ink-3:      #82828C;
 
-  --le-glass:        color-mix(in srgb, var(--le-paper) 52%, transparent);
-  --le-glass-strong: color-mix(in srgb, var(--le-paper) 70%, transparent);
-  --le-shadow-sheet: 0 1px 0 rgba(255, 255, 255, 0.16) inset,
-                     0 0 0 1px rgba(255, 255, 255, 0.07) inset,
-                     0 -22px 50px rgba(0, 0, 0, 0.45);
-  --le-shadow-card:  0 1px 0 rgba(255, 255, 255, 0.13) inset,
-                     0 0 0 1px rgba(255, 255, 255, 0.06) inset,
-                     0 8px 24px rgba(0, 0, 0, 0.32);
+  --le-rule:       #27272E;
+  --le-rule-soft:  #1B1B20;
+
+  --le-highlight:    #E3FF4F;
+  --le-on-highlight: #0B0B0C;
+
+  --le-com:        #7FD8FF;
+  --le-com-soft:   #10222C;
+  --le-biz:        #FFB27F;
+  --le-biz-soft:   #2A1C12;
+
+  --le-verified:    #2BD46E;
+  --le-on-verified: #05270F;
+
+  --le-good:       #2BD46E;
+  --le-good-soft:  #0E2A1A;
+  --le-warn:       #FFD84D;
+  --le-warn-soft:  #2A2410;
+  --le-danger:      #FF6B5E;
+  --le-danger-soft: #2B1413;
+
+  --le-accent:    var(--le-highlight);
+  --le-on-accent: var(--le-on-highlight);
+
+  --le-track-display: -0.04em;
+  --le-track-tight: -0.022em;
+
+  --le-shadow: 0 1px 2px rgba(0, 0, 0, 0.6),
+               0 10px 30px -12px rgba(0, 0, 0, 0.8);
+
+  --le-blur:    blur(44px) saturate(150%);
+  --le-blur-sm: blur(20px) saturate(135%);
+
+  --le-sheen: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.02) 30%,
+    rgba(255, 255, 255, 0.00) 60%
+  );
+
+  --le-shadow-sheet: 0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+                     0 -22px 60px rgba(0, 0, 0, 0.55);
+  --le-shadow-card:  0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+                     0 6px 24px -14px rgba(0, 0, 0, 0.7);
 }
 
-:root[data-theme="light"] {
-  --le-paper:     #F3F2EA;
-  --le-surface:   #FBFAF4;
-  --le-sunken:    #DAD7C8;
-  --le-ink:       #09324A;
-  --le-ink-2:     #3C5A6D;
-  --le-ink-3:     #6B8493;
-  --le-rule:      #DAD7C8;
-  --le-rule-soft: #E8E6DB;
-  --le-com:       #1B6F81;
-  --le-com-soft:  #E2EFF1;
-  --le-biz:       #09324A;
-  --le-biz-soft:  #DEE7ED;
-  --le-good:      #2C7A6B;
-  /* Verification green — its own token, not --le-good.
-     --le-good is the palette's muted teal for general success; this one has a
-     single job and must be seen at 13px on a card. Semantic colours sit
-     outside the brand accent, which is why a true green is allowed here and
-     nowhere else.
-
-     TWO values, because one cannot do both jobs on a cream ground:
-       -seal  the bright green people read as "verified" — a filled shape, so
-              it only needs 3:1, and it carries the brightness
-       -ink   the darker green for the word and the border, which is small
-              bold text and needs 4.5:1. #16A34A managed only 2.93:1 on Picket
-              Fence and was genuinely hard to read.                          */
-  --le-verified: #137A38;
-  --le-verified-seal: #16A34A;
-  --le-good-soft: #AED0C9;
-  --le-warn:      #6B5A00;
-  --le-warn-soft: #FFFDBF;
-  --le-highlight: #FFFB08;
-
-  /* Text on Banana King. Must stay Halite in BOTH themes — the button is
-     always yellow, so it never follows --le-ink. White on #FFFB08 is
-     unreadable; Halite on it is ~19:1. */
-  --le-on-highlight: #09324A;
-
-  /* MP213 has no red, but destructive actions need one. A brick that sits with
-     the teal and cream rather than Bootstrap's #c0392b, which reads borrowed. */
-  --le-danger:      #A8372B;
-  --le-danger-soft: #F6E3DF;
-  /* Two layers: a tight contact shadow so the edge reads, and a wide soft one
-     for lift. A single mid-blur shadow is what makes a card look like a 2015
-     card. */
-  --le-shadow: 0 1px 2px rgba(9, 50, 74, 0.05),
-               0 8px 24px -10px rgba(9, 50, 74, 0.18);
-
-  /* ── surfaces ──────────────────────────────────────────────────────────
-     Shared by the shell AND every fragment, so the whole app reads as one
-     surface system. Fragments must use these rather than inventing panels. */
-
-  --le-glass:        color-mix(in srgb, var(--le-paper) 58%, transparent);
-  --le-glass-strong: color-mix(in srgb, var(--le-paper) 74%, transparent);
-  --le-blur:         blur(44px) saturate(190%) brightness(1.06);
-  --le-blur-sm:      blur(20px) saturate(165%) brightness(1.04);
-
-  --le-r-sheet: 28px;      /* a sheet lifted over content */
-  --le-r-card:  16px;      /* cards inside a sheet */
-
-  --le-shadow-sheet: 0 1px 0 rgba(255, 255, 255, 0.75) inset,
-                     0 0 0 1px rgba(255, 255, 255, 0.22) inset,
-                     0 -22px 50px rgba(4, 27, 40, 0.20);
-  --le-shadow-card:  0 1px 0 rgba(255, 255, 255, 0.65) inset,
-                     0 0 0 1px rgba(255, 255, 255, 0.18) inset,
-                     0 8px 24px rgba(9, 50, 74, 0.10);
+/* The browser's own furniture — form controls, scrollbars, the space behind a
+   rubber-band scroll. Without this they stay light and flash white. */
+:root { color-scheme: dark; }
+:root[data-theme="light"] { color-scheme: light; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) { color-scheme: light; }
 }

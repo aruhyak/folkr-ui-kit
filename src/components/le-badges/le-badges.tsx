@@ -51,8 +51,8 @@ export class LeBadges {
     return (
       <svg class="tick" viewBox="0 0 24 24" aria-hidden="true">
         <path
+          class="seal"
           d="M12 2.2 14.6 4l3.2-.2 1 3 2.6 1.9-1.2 3 1.2 3-2.6 1.9-1 3-3.2-.2L12 21.8 9.4 20l-3.2.2-1-3L2.6 15.3l1.2-3-1.2-3 2.6-1.9 1-3L9.4 4Z"
-          fill="#fff"
         />
         {/* Colour comes from CSS, not a stroke="" attribute: var() inside an
             SVG presentation attribute is not reliably resolved, and when it
