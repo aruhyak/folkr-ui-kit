@@ -73,6 +73,20 @@ export class LePostDetail {
   @Prop() serverThreads?: unknown[];
 
   /**
+   * Is there a server behind this app at all?
+   *
+   * Stated by the shell, NOT inferred from whether data arrived. Inferring it
+   * is what made this silent: a failed fetch left serverThreads undefined, the
+   * component concluded there was no server, and wrote the reply to this
+   * device instead. The message looked sent to the only person who could not
+   * tell it had not been.
+   *
+   * With a server configured, a write either reaches it or fails loudly. There
+   * is no third option where it quietly lands somewhere nobody else can see.
+   */
+  @Prop() serverMode = false;
+
+  /**
    * The live post from the server, replacing what the feed had.
    *
    * This is how contactPhone arrives: the feed never carries it, so a detail
@@ -145,15 +159,18 @@ export class LePostDetail {
    * that matters is the server's; this one keeps the local build honest.
    */
   private load() {
+    // With a server, its answer is the only source — including when that
+    // answer has not arrived yet. Falling back to this device's storage would
+    // show messages nobody else can see, mixed in with ones they can.
+    if (this.serverMode) {
+      this.threads = (this.serverThreads as Thread[]) ?? [];
+      return;
+    }
     // Without a post there is no id to look conversations up by. This used to
     // throw at mount, which took the whole page down and left a blank screen
     // with nothing in the console pointing here — a missing required prop
     // should degrade, not detonate.
     if (!this.current) { this.threads = []; return; }
-    if (this.serverThreads) {
-      this.threads = this.serverThreads as Thread[];
-      return;
-    }
     const all = threadsOn(this.post.id);
     this.threads = this.isOwner
       ? all
@@ -170,7 +187,7 @@ export class LePostDetail {
     if (!message || this.working) return;
     this.working = true;
 
-    if (this.serverThreads) {
+    if (this.serverMode) {
       // The shell writes it and hands back new threads. The draft is NOT
       // cleared yet — if the send fails, clearing it would delete what someone
       // typed and leave nothing to retry with.
@@ -204,7 +221,7 @@ export class LePostDetail {
     );
     if (!ok) return;
 
-    if (this.serverThreads) {
+    if (this.serverMode) {
       // Ask; do not assume. Writing claimState here would show the number as
       // released before the server agreed, and two people racing to be chosen
       // would both see themselves win.
