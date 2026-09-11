@@ -660,7 +660,7 @@ export class LePostDetail {
               ) : null}
 
               <p class="warn">
-                Local Events just carries the post. Arrangements are between you
+                Folkr just carries the post. Arrangements are between you
                 and the other person, at your own risk — meet somewhere public
                 and use your judgement.
               </p>
