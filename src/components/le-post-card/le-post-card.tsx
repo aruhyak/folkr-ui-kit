@@ -193,7 +193,15 @@ export class LePostCard {
           onClick={this.open}
           onKeyDown={this.onKey}
         >
-          <div class="cover">
+          {/* A real photograph fills the card — that is what an image-led
+              feed is for. A DRAWN cover is not a photograph, and stretching one
+              to banner width crops its subject away and leaves a wide band of
+              flat colour saying nothing.
+
+              So when nobody uploaded a picture the card shows the same icon
+              tile the compact rows use, at the same size. A small mark that
+              tells you what the post is beats a large one that does not. */}
+          <div class={{ cover: true, drawn: !p.imageUrl }}>
             <img src={imageFor(p)} alt="" loading="lazy" decoding="async" />
 
             {/* Over the image, not under it — the badges are what the picture

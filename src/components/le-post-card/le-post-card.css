@@ -258,3 +258,50 @@ input, textarea, select { font-size: 16px !important; }
   color: var(--le-ink-3);
   white-space: nowrap;
 }
+
+/* ── a card with no photograph ────────────────────────────────────────────
+   The generated cover is a 224x140 poster with its subject in the middle.
+   Stretched across a card it gets cropped to a letterbox strip — the glyph
+   disappears and what is left is a wide band of flat colour that tells you
+   nothing about the post.
+
+   So it becomes a tile instead, the same 44px mark the compact rows use, on
+   the card's own surface. The icon is the point; the banner never was. */
+.cover.drawn {
+  aspect-ratio: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--le-surface);
+  box-shadow: none;
+  border: 1px solid var(--le-rule-soft);
+}
+
+.cover.drawn img {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* The badges sat over the photograph. With no photograph to sit on they move
+   into the row beside the icon, where they still read before you tap. */
+.cover.drawn .badges {
+  position: static;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+}
+
+/* Save stays in its corner, but against a surface rather than an image, so it
+   no longer needs the scrim that kept it legible over a photo. */
+.cover.drawn .save {
+  position: static;
+  margin-left: auto;
+  flex: none;
+  background: transparent;
+  backdrop-filter: none;
+}
