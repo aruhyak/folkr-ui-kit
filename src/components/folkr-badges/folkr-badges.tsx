@@ -24,8 +24,8 @@ import { Component, Prop, h, Host } from '@stencil/core';
  * Sizes in em, so a badge scales with whatever text it sits beside.
  */
 @Component({
-  tag: 'le-badges',
-  styleUrl: 'le-badges.css',
+  tag: 'folkr-badges',
+  styleUrl: 'folkr-badges.css',
   shadow: true,
 })
 export class LeBadges {

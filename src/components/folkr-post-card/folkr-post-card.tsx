@@ -1,9 +1,9 @@
 import { Component, Prop, State, Event, EventEmitter, h, Host } from '@stencil/core';
-import type { Post, EventPost, RequestPost, OfferPost } from '@le/shared';
+import type { Post, EventPost, RequestPost, OfferPost } from '@folkr/shared';
 import {
   formatDistance, formatWhen, formatRange, formatDailyRun, formatWeekly, untilOf,
   requiresLicence, isSaved, toggleSave, imageFor,
-} from '@le/shared';
+} from '@folkr/shared';
 
 /**
  * One post in the feed. Renders all three shapes from a single component,
@@ -20,8 +20,8 @@ import {
  * is worse than the text card it replaced.
  */
 @Component({
-  tag: 'le-post-card',
-  styleUrl: 'le-post-card.css',
+  tag: 'folkr-post-card',
+  styleUrl: 'folkr-post-card.css',
   shadow: true,
 })
 export class LePostCard {
@@ -47,10 +47,10 @@ export class LePostCard {
    * the seed data at all, so an id would be unresolvable. The card already
    * holds everything the detail view needs.
    */
-  @Event({ eventName: 'le:open-post', bubbles: true, composed: true })
+  @Event({ eventName: 'folkr:open-post', bubbles: true, composed: true })
   openPost!: EventEmitter<{ post: Post; distanceKm: number }>;
 
-  @Event({ eventName: 'le:toggle-save', bubbles: true, composed: true })
+  @Event({ eventName: 'folkr:toggle-save', bubbles: true, composed: true })
   toggleSaved!: EventEmitter<{ id: string; saved: boolean }>;
 
   componentWillLoad() {
@@ -80,14 +80,14 @@ export class LePostCard {
     const p = this.post;
     if (p.kind === 'event') {
       return p.author.kind === 'business'
-        ? <le-badge tone="biz" label="Venue" />
-        : <le-badge tone="com" label="Community" />;
+        ? <folkr-badge tone="biz" label="Venue" />
+        : <folkr-badge tone="com" label="Community" />;
     }
     if (p.kind === 'request') {
       const t = (p as RequestPost).serviceType;
-      return <le-badge tone="com" label={t === 'petcare' ? 'Pet care' : 'Help needed'} />;
+      return <folkr-badge tone="com" label={t === 'petcare' ? 'Pet care' : 'Help needed'} />;
     }
-    return <le-badge tone="biz" label="Service" />;
+    return <folkr-badge tone="biz" label="Service" />;
   }
 
   private trustBadges() {
@@ -95,7 +95,7 @@ export class LePostCard {
     const out = [];
 
     if (p.author.kind === 'business' && p.author.verified) {
-      out.push(<le-badge tone="good" glyph="✓" label="Verified" />);
+      out.push(<folkr-badge tone="good" glyph="✓" label="Verified" />);
     }
 
     if (p.kind === 'offer') {
@@ -103,14 +103,14 @@ export class LePostCard {
       if (requiresLicence(o.trades)) {
         out.push(
           o.licence?.verified
-            ? <le-badge tone="good" glyph="✓" label={`Licence ${o.licence.state}`} />
-            : <le-badge tone="warn" glyph="!" label="Licence unverified" />,
+            ? <folkr-badge tone="good" glyph="✓" label={`Licence ${o.licence.state}`} />
+            : <folkr-badge tone="warn" glyph="!" label="Licence unverified" />,
         );
       }
     }
 
     if (p.kind === 'request' && (p as RequestPost).requiresHomeAccess) {
-      out.push(<le-badge tone="warn" glyph="⌂" label="Home access" />);
+      out.push(<folkr-badge tone="warn" glyph="⌂" label="Home access" />);
     }
 
     return out;
@@ -213,7 +213,7 @@ export class LePostCard {
             <div class="badges">
               {this.kindBadge()}
               {this.trustBadges()}
-              {claimed ? <le-badge tone="neutral" label="Claimed" /> : null}
+              {claimed ? <folkr-badge tone="neutral" label="Claimed" /> : null}
             </div>
 
             <button
@@ -249,7 +249,7 @@ export class LePostCard {
                 {/* Badges, not bare ticks. The word carries the claim — a lone
                     checkmark reads as decoration, and this is the one signal
                     someone weighs before letting a stranger into their home. */}
-                <le-badges
+                <folkr-badges
                   idVerified={p.author.idVerified}
                   phoneVerified={p.author.phoneVerified === true}
                   size="sm"

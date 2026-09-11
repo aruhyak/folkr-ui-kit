@@ -1,5 +1,5 @@
 {
-  "name": "@le/ui-kit",
+  "name": "@folkr/ui-kit",
   "version": "0.1.0",
   "private": false,
   "description": "Stencil design system for Local Events \u2014 tokens, badges, post card",
@@ -15,12 +15,12 @@
     },
     "./tokens.css": "./src/tokens.css",
     "./post-detail": {
-      "types": "./dist/components/le-post-detail.d.ts",
-      "import": "./dist/components/le-post-detail.js"
+      "types": "./dist/components/folkr-post-detail.d.ts",
+      "import": "./dist/components/folkr-post-detail.js"
     },
     "./ask": {
-      "types": "./dist/components/le-ask.d.ts",
-      "import": "./dist/components/le-ask.js"
+      "types": "./dist/components/folkr-ask.d.ts",
+      "import": "./dist/components/folkr-ask.js"
     }
   },
   "files": [
@@ -34,7 +34,7 @@
     "prepare": "stencil build"
   },
   "dependencies": {
-    "@le/shared": "github:aruhyak/localevents-shared#v0.22.0"
+    "@folkr/shared": "github:aruhyak/folkr-shared#v0.23.0"
   },
   "devDependencies": {
     "@stencil/core": "^4.22.2",

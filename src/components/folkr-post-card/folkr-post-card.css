@@ -28,14 +28,14 @@
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-.card:focus-visible { outline: 2px solid var(--le-com); outline-offset: 4px; border-radius: var(--le-r-card); }
+.card:focus-visible { outline: 2px solid var(--folkr-com); outline-offset: 4px; border-radius: var(--folkr-r-card); }
 
 .cover {
   position: relative;
   aspect-ratio: 16 / 10;
-  border-radius: var(--le-r-card);
+  border-radius: var(--folkr-r-card);
   overflow: hidden;
-  background: var(--le-sunken, #eceade);
+  background: var(--folkr-sunken, #eceade);
   /* The image is the whole card, so its edge does the work a border used to.
      A visible 1px rule around a photograph reads as a stock template. */
   box-shadow: 0 1px 2px rgba(9, 50, 74, 0.06),
@@ -96,20 +96,20 @@
   transition: transform 0.12s ease;
 }
 .save svg { width: 22px; height: 22px; }
-.save.on { color: var(--le-highlight); }
+.save.on { color: var(--folkr-highlight); }
 .save:active { transform: scale(0.88); }
 .save:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
 
 .text { padding: 9px 2px 0; min-width: 0; }
 
 .title {
-  font-family: var(--le-display);
-  letter-spacing: var(--le-track-tight);
+  font-family: var(--folkr-display);
+  letter-spacing: var(--folkr-track-tight);
   margin: 0 0 2px;
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.25;
-  color: var(--le-ink);
+  color: var(--folkr-ink);
   /* Two lines maximum. A four-line title breaks the grid rhythm, which is
      most of what makes a card grid look composed. */
   display: -webkit-box;
@@ -126,11 +126,11 @@
   min-width: 0;
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--le-ink-2);
+  color: var(--folkr-ink-2);
 }
 .when { white-space: nowrap; }
-.dot { color: var(--le-ink-3); }
-.dist { color: var(--le-ink-3); white-space: nowrap; }
+.dot { color: var(--folkr-ink-3); }
+.dist { color: var(--folkr-ink-3); white-space: nowrap; }
 
 .foot {
   display: flex;
@@ -139,9 +139,9 @@
   min-width: 0;
   margin: 3px 0 0;
   font-size: 0.8rem;
-  color: var(--le-ink-3);
+  color: var(--folkr-ink-3);
 }
-.price { font-weight: 700; color: var(--le-ink); }
+.price { font-weight: 700; color: var(--folkr-ink); }
 .who {
   display: flex;
   align-items: center;
@@ -164,15 +164,15 @@
   /* Solid, not a tint. A filled pill reads far brighter at this size, and the
      colour is the brightest green that still keeps white text at 4.5:1 on it —
      #16A34A managed only 3.3:1 and was genuinely hard to read. */
-  background: var(--le-verified);
+  background: var(--folkr-verified);
   border: none;
   color: #fff;
-  font-family: var(--le-sans);
+  font-family: var(--folkr-sans);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.04em;
   line-height: 1;
-  box-shadow: 0 1px 3px -1px color-mix(in srgb, var(--le-verified) 70%, transparent);
+  box-shadow: 0 1px 3px -1px color-mix(in srgb, var(--folkr-verified) 70%, transparent);
 }
 .idv svg { width: 16px; height: 16px; display: block; flex: none; color: #fff; }
 
@@ -200,7 +200,7 @@ input, textarea, select { font-size: 16px !important; }
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-.row:focus-visible { outline: 2px solid var(--le-com); outline-offset: -2px; border-radius: var(--le-r-sm); }
+.row:focus-visible { outline: 2px solid var(--folkr-com); outline-offset: -2px; border-radius: var(--folkr-r-sm); }
 
 .row-img {
   flex: none;
@@ -208,7 +208,7 @@ input, textarea, select { font-size: 16px !important; }
   height: 44px;
   border-radius: 10px;
   object-fit: cover;
-  background: var(--le-sunken, #eceade);
+  background: var(--folkr-sunken, #eceade);
 }
 
 .row-text { display: flex; flex-direction: column; min-width: 0; flex: 1 1 auto; }
@@ -216,7 +216,7 @@ input, textarea, select { font-size: 16px !important; }
 .row-title {
   font-size: 0.9rem;
   font-weight: 650;
-  color: var(--le-ink);
+  color: var(--folkr-ink);
   /* One line. A wrapping title is what turns a row back into a card. */
   overflow: hidden;
   text-overflow: ellipsis;
@@ -224,7 +224,7 @@ input, textarea, select { font-size: 16px !important; }
 }
 .row-sub {
   font-size: 0.76rem;
-  color: var(--le-ink-3);
+  color: var(--folkr-ink-3);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -247,15 +247,15 @@ input, textarea, select { font-size: 16px !important; }
   max-width: 100%;
   font-size: 0.78rem;
   font-weight: 650;
-  color: var(--le-ink-2);
+  color: var(--folkr-ink-2);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .row-dist {
-  font-family: var(--le-mono);
+  font-family: var(--folkr-mono);
   font-size: 0.68rem;
-  color: var(--le-ink-3);
+  color: var(--folkr-ink-3);
   white-space: nowrap;
 }
 
@@ -273,9 +273,9 @@ input, textarea, select { font-size: 16px !important; }
   align-items: center;
   gap: 12px;
   padding: 12px;
-  background: var(--le-surface);
+  background: var(--folkr-surface);
   box-shadow: none;
-  border: 1px solid var(--le-rule-soft);
+  border: 1px solid var(--folkr-rule-soft);
 }
 
 .cover.drawn img {

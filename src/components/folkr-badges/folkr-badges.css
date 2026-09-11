@@ -19,16 +19,16 @@
   border-radius: 100px;
   /* Solid rather than a tint. A filled pill reads far brighter at this size,
      and this is the brightest green that still keeps white at 4.5:1 on it. */
-  background: var(--le-verified, #12b551);
+  background: var(--folkr-verified, #12b551);
   /* Not always white. On the dark theme the pill is a much brighter green,
      and white on it fails contrast badly — this is the one element somebody
      squints at before deciding whether to let a stranger into their house. */
-  color: var(--le-on-verified, #fff);
-  font-family: var(--le-sans, system-ui, sans-serif);
+  color: var(--folkr-on-verified, #fff);
+  font-family: var(--folkr-sans, system-ui, sans-serif);
   font-weight: 800;
   letter-spacing: 0.04em;
   line-height: 1;
-  box-shadow: 0 1px 3px -1px color-mix(in srgb, var(--le-verified, #12b551) 70%, transparent);
+  box-shadow: 0 1px 3px -1px color-mix(in srgb, var(--folkr-verified, #12b551) 70%, transparent);
 }
 
 .label { display: block; }
@@ -38,11 +38,11 @@
    check on a white seal is invisible, and nothing anywhere fails when a tick
    is the same colour as what is behind it — which is how the badge this
    replaced rendered as a plain dot for its whole life. */
-.tick .check { stroke: var(--le-verified, #12b551); }
+.tick .check { stroke: var(--folkr-verified, #12b551); }
 
 /* The seal is the pill's text colour, so the check punched out of it stays
    readable whichever way round the theme puts them. */
-.tick .seal { fill: var(--le-on-verified, #fff); }
+.tick .seal { fill: var(--folkr-on-verified, #fff); }
 
 /* The phone glyph is drawn in outline, so it needs a touch more room than the
    two letters of ID to look like the same weight of mark. */

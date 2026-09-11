@@ -10,8 +10,8 @@ export type BadgeTone = 'com' | 'biz' | 'warn' | 'good' | 'neutral';
  * disclose whether they verify — silence is not an option.
  */
 @Component({
-  tag: 'le-badge',
-  styleUrl: 'le-badge.css',
+  tag: 'folkr-badge',
+  styleUrl: 'folkr-badge.css',
   shadow: true,
 })
 export class LeBadge {

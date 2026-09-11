@@ -1,5 +1,5 @@
 import { Component, Prop, State, Event, EventEmitter, h, Host, Listen } from '@stencil/core';
-import type { ServiceType } from '@le/shared';
+import type { ServiceType } from '@folkr/shared';
 
 /**
  * Asking a neighbour for a hand.
@@ -16,8 +16,8 @@ import type { ServiceType } from '@le/shared';
  * trust signal is the ID badge on the person, shown wherever their name is.
  */
 @Component({
-  tag: 'le-ask',
-  styleUrl: 'le-ask.css',
+  tag: 'folkr-ask',
+  styleUrl: 'folkr-ask.css',
   shadow: true,
 })
 export class LeAsk {
@@ -51,7 +51,7 @@ export class LeAsk {
     phone: '',
   };
 
-  @Event({ eventName: 'le:create-request', bubbles: true, composed: true })
+  @Event({ eventName: 'folkr:create-request', bubbles: true, composed: true })
   createRequest!: EventEmitter<Record<string, unknown>>;
 
   @Listen('keydown', { target: 'document' })

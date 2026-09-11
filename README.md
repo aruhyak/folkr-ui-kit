@@ -1,17 +1,17 @@
-# @le/ui-kit
+# @folkr/ui-kit
 
 Stencil design system for Local Events. Framework-agnostic web components —
-the same `<le-post-card>` works in any fragment, and would work in a future
+the same `<folkr-post-card>` works in any fragment, and would work in a future
 React or Angular admin tool.
 
-Depends on [`@le/shared`](https://github.com/aruhyak/localevents-shared).
+Depends on [`@folkr/shared`](https://github.com/aruhyak/localevents-shared).
 
 ## Components
 
 | Tag | Purpose |
 |---|---|
-| `<le-badge>` | Status pill — post kind, verified business, licence state |
-| `<le-post-card>` | One post in the feed. Renders all three post shapes |
+| `<folkr-badge>` | Status pill — post kind, verified business, licence state |
+| `<folkr-post-card>` | One post in the feed. Renders all three post shapes |
 
 ## Tokens
 
@@ -19,7 +19,7 @@ Depends on [`@le/shared`](https://github.com/aruhyak/localevents-shared).
 shell:
 
 ```ts
-import '@le/ui-kit/tokens.css';
+import '@folkr/ui-kit/tokens.css';
 ```
 
 **The two accents carry meaning, not decoration:**
@@ -44,12 +44,12 @@ is not an option, so the component makes the honest state the easy one.
 
 ```json
 "dependencies": {
-  "@le/ui-kit": "github:aruhyak/localevents-ui-kit#v0.1.0"
+  "@folkr/ui-kit": "github:aruhyak/localevents-ui-kit#v0.1.0"
 }
 ```
 
 ```ts
-import '@le/ui-kit';   // auto-defines the custom elements
+import '@folkr/ui-kit';   // auto-defines the custom elements
 ```
 
 Built with `customElementsExportBehavior: 'auto-define-custom-elements'`, so
@@ -95,16 +95,16 @@ rights to use the code.
 ## Importing a standalone component
 
 Stencil's `dist/components/index.js` only registers components that another
-component references. `le-post-card` pulls in `le-badge`, so both are there;
-`le-post-detail` is referenced by nothing in this package, so it is compiled to
-its own file and left out of the index — importing `@le/ui-kit` alone will not
+component references. `folkr-post-card` pulls in `folkr-badge`, so both are there;
+`folkr-post-detail` is referenced by nothing in this package, so it is compiled to
+its own file and left out of the index — importing `@folkr/ui-kit` alone will not
 define it.
 
 Standalone components therefore get an explicit subpath, and each self-registers
 on import:
 
 ```ts
-import '@le/ui-kit/post-detail';   // defines <le-post-detail>
+import '@folkr/ui-kit/post-detail';   // defines <folkr-post-detail>
 ```
 
 Add a new subpath to `exports` whenever a component is used directly by a

@@ -28,20 +28,20 @@
   /* ── grounds ───────────────────────────────────────────────────────────
      Not pure black. #000 makes every shadow invisible and every edge hard,
      and on OLED it smears when you scroll. A hair above it keeps depth. */
-  --le-paper:      #0B0B0C;
-  --le-surface:    #151518;   /* cards, sheets */
-  --le-sunken:     #070708;   /* wells, inputs */
+  --folkr-paper:      #0B0B0C;
+  --folkr-surface:    #151518;   /* cards, sheets */
+  --folkr-sunken:     #070708;   /* wells, inputs */
 
   /* ── ink ───────────────────────────────────────────────────────────────
      Full white for the thing you are reading; two greys below it. Both greys
      are very slightly cool so they sit with the ground rather than looking
      like dirty white. */
-  --le-ink:        #FFFFFF;
-  --le-ink-2:      #A6A6AF;   /* secondary text — 7.4:1 on the ground */
-  --le-ink-3:      #82828C;   /* labels, timestamps — 5.2:1 on ground, 4.8:1 on cards */
+  --folkr-ink:        #FFFFFF;
+  --folkr-ink-2:      #A6A6AF;   /* secondary text — 7.4:1 on the ground */
+  --folkr-ink-3:      #82828C;   /* labels, timestamps — 5.2:1 on ground, 4.8:1 on cards */
 
-  --le-rule:       #27272E;
-  --le-rule-soft:  #1B1B20;
+  --folkr-rule:       #27272E;
+  --folkr-rule-soft:  #1B1B20;
 
   /* ── the accent ────────────────────────────────────────────────────────
      White. On a near-black ground nothing is louder, and unlike a colour it
@@ -54,95 +54,95 @@
 
      Violet is the brand mark and nothing else. It never appears on a control,
      because a colour that means "us" cannot also mean "press this". */
-  --le-highlight:    #FFFFFF;
-  --le-on-highlight: #0B0B0C;
+  --folkr-highlight:    #FFFFFF;
+  --folkr-on-highlight: #0B0B0C;
   /* Legible as text as well as usable as a logo fill. #6C3BFF is the truer
      brand violet but only reaches 3.5:1 on this ground, and a token that is
      safe in one use and unreadable in another gets used wrong eventually. */
-  --le-brand:        #8B63FF;
+  --folkr-brand:        #8B63FF;
 
   /* ── category accents ──────────────────────────────────────────────────
      These say WHAT something is, so they must be told apart at a glance and
      at badge size. Cyan and amber sit far enough apart in hue to survive
      both. The -soft pairs are grounds for tinted pills, mixed from the accent
      so they stay related to it rather than being invented greys. */
-  --le-com:        #7FD8FF;
-  --le-com-soft:   #10222C;
-  --le-biz:        #FFB27F;
-  --le-biz-soft:   #2A1C12;
+  --folkr-com:        #7FD8FF;
+  --folkr-com-soft:   #10222C;
+  --folkr-biz:        #FFB27F;
+  --folkr-biz-soft:   #2A1C12;
 
   /* ── verification ──────────────────────────────────────────────────────
      Bright green with DARK text on it. White on a green this bright fails
      contrast badly, and the badge is the one element on the page somebody
      squints at before deciding whether to let a stranger into their house. */
-  --le-verified:    #2BD46E;
-  --le-on-verified: #05270F;
+  --folkr-verified:    #2BD46E;
+  --folkr-on-verified: #05270F;
 
-  --le-good:       #2BD46E;
-  --le-good-soft:  #0E2A1A;
+  --folkr-good:       #2BD46E;
+  --folkr-good-soft:  #0E2A1A;
 
-  --le-warn:       #FFD84D;
-  --le-warn-soft:  #2A2410;
+  --folkr-warn:       #FFD84D;
+  --folkr-warn-soft:  #2A2410;
 
-  --le-danger:      #FF6B5E;
-  --le-danger-soft: #2B1413;
+  --folkr-danger:      #FF6B5E;
+  --folkr-danger-soft: #2B1413;
 
   /* ── semantic aliases ──────────────────────────────────────────────────
      The same colours under the names components actually reach for. These
      were missing, so every component written recently fell back to hardcoded
      hex values and sat outside the palette entirely — which is why they could
      not be re-themed at all. */
-  --le-bg:        var(--le-paper);
-  --le-fg:        var(--le-ink);
-  --le-muted:     var(--le-ink-3);
-  --le-line:      var(--le-rule);
-  --le-accent:    var(--le-highlight);
-  --le-on-accent: var(--le-on-highlight);
+  --folkr-bg:        var(--folkr-paper);
+  --folkr-fg:        var(--folkr-ink);
+  --folkr-muted:     var(--folkr-ink-3);
+  --folkr-line:      var(--folkr-rule);
+  --folkr-accent:    var(--folkr-highlight);
+  --folkr-on-accent: var(--folkr-on-highlight);
 
   /* ── type ──────────────────────────────────────────────────────────────── */
-  --le-display: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
-  --le-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --le-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --folkr-display: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
+  --folkr-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --folkr-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   /* Tighter than the light theme was. White on black looks looser than black
      on white at the same tracking — the letters bloom — so display type is
      pulled in to compensate. */
-  --le-track-display: -0.04em;
-  --le-track-tight: -0.022em;
-  --le-track-label: 0.08em;
+  --folkr-track-display: -0.04em;
+  --folkr-track-tight: -0.022em;
+  --folkr-track-label: 0.08em;
 
-  --le-r-sm: 8px;
-  --le-r-md: 12px;
-  --le-r-pill: 100px;
+  --folkr-r-sm: 8px;
+  --folkr-r-md: 12px;
+  --folkr-r-pill: 100px;
 
   /* ── depth ─────────────────────────────────────────────────────────────
      On a dark ground a shadow cannot be seen, so lift comes from the surface
      being lighter than the ground and from a hairline edge. The shadows stay
      defined, deeper and softer, for the few places something floats over
      content — a sheet, a dialog. */
-  --le-shadow: 0 1px 2px rgba(0, 0, 0, 0.6),
+  --folkr-shadow: 0 1px 2px rgba(0, 0, 0, 0.6),
                0 10px 30px -12px rgba(0, 0, 0, 0.8);
 
-  --le-glass:        color-mix(in srgb, var(--le-paper) 72%, transparent);
-  --le-glass-strong: color-mix(in srgb, var(--le-paper) 86%, transparent);
-  --le-blur:         blur(44px) saturate(150%);
-  --le-blur-sm:      blur(20px) saturate(135%);
+  --folkr-glass:        color-mix(in srgb, var(--folkr-paper) 72%, transparent);
+  --folkr-glass-strong: color-mix(in srgb, var(--folkr-paper) 86%, transparent);
+  --folkr-blur:         blur(44px) saturate(150%);
+  --folkr-blur-sm:      blur(20px) saturate(135%);
 
   /* A faint top edge, not a gloss. The bright specular sheen that reads as
      glass on a pale surface reads as a smear on a dark one. */
-  --le-sheen: linear-gradient(
+  --folkr-sheen: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0.07) 0%,
     rgba(255, 255, 255, 0.02) 30%,
     rgba(255, 255, 255, 0.00) 60%
   );
 
-  --le-r-sheet: 28px;
-  --le-r-card:  16px;
+  --folkr-r-sheet: 28px;
+  --folkr-r-card:  16px;
 
-  --le-shadow-sheet: 0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+  --folkr-shadow-sheet: 0 0 0 1px rgba(255, 255, 255, 0.08) inset,
                      0 -22px 60px rgba(0, 0, 0, 0.55);
-  --le-shadow-card:  0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+  --folkr-shadow-card:  0 0 0 1px rgba(255, 255, 255, 0.06) inset,
                      0 6px 24px -14px rgba(0, 0, 0, 0.7);
 }
 
@@ -158,62 +158,62 @@
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
-    --le-paper:      #F3F2EA;
-    --le-surface:    #FBFAF4;
-    --le-sunken:     #DAD7C8;
+    --folkr-paper:      #F3F2EA;
+    --folkr-surface:    #FBFAF4;
+    --folkr-sunken:     #DAD7C8;
 
-    --le-ink:        #09324A;
-    --le-ink-2:      #3C5A6D;
-    --le-ink-3:      #57707F;   /* 4.6:1 on paper. #6B8493 was 3.5:1 — it had never passed. */
+    --folkr-ink:        #09324A;
+    --folkr-ink-2:      #3C5A6D;
+    --folkr-ink-3:      #57707F;   /* 4.6:1 on paper. #6B8493 was 3.5:1 — it had never passed. */
 
-    --le-rule:       #DAD7C8;
-    --le-rule-soft:  #E8E6DB;
+    --folkr-rule:       #DAD7C8;
+    --folkr-rule-soft:  #E8E6DB;
 
-    --le-highlight:    #FFFB08;
-    --le-on-highlight: #09324A;
-    --le-brand:        #4B23C9;
+    --folkr-highlight:    #FFFB08;
+    --folkr-on-highlight: #09324A;
+    --folkr-brand:        #4B23C9;
 
-    --le-com:        #1B6F81;
-    --le-com-soft:   #E2EFF1;
-    --le-biz:        #09324A;
-    --le-biz-soft:   #DEE7ED;
+    --folkr-com:        #1B6F81;
+    --folkr-com-soft:   #E2EFF1;
+    --folkr-biz:        #09324A;
+    --folkr-biz-soft:   #DEE7ED;
 
-    --le-verified:    #15883E;
-    --le-on-verified: #FFFFFF;
+    --folkr-verified:    #15883E;
+    --folkr-on-verified: #FFFFFF;
 
-    --le-good:       #2C7A6B;
-    --le-good-soft:  #AED0C9;
-    --le-warn:       #6B5A00;
-    --le-warn-soft:  #FFFDBF;
-    --le-danger:      #A8372B;
-    --le-danger-soft: #F6E3DF;
+    --folkr-good:       #2C7A6B;
+    --folkr-good-soft:  #AED0C9;
+    --folkr-warn:       #6B5A00;
+    --folkr-warn-soft:  #FFFDBF;
+    --folkr-danger:      #A8372B;
+    --folkr-danger-soft: #F6E3DF;
 
     /* The primary action is the ink itself here. Banana King is a highlight,
        not a button — a full-width yellow button on cream has no contrast for
        its own label. */
-    --le-accent:    var(--le-ink);
-    --le-on-accent: var(--le-paper);
+    --folkr-accent:    var(--folkr-ink);
+    --folkr-on-accent: var(--folkr-paper);
 
-    --le-track-display: -0.035em;
-    --le-track-tight: -0.02em;
+    --folkr-track-display: -0.035em;
+    --folkr-track-tight: -0.02em;
 
-    --le-shadow: 0 1px 2px rgba(9, 50, 74, 0.05),
+    --folkr-shadow: 0 1px 2px rgba(9, 50, 74, 0.05),
                  0 8px 24px -10px rgba(9, 50, 74, 0.18);
 
-    --le-blur:    blur(44px) saturate(190%) brightness(1.06);
-    --le-blur-sm: blur(20px) saturate(165%) brightness(1.04);
+    --folkr-blur:    blur(44px) saturate(190%) brightness(1.06);
+    --folkr-blur-sm: blur(20px) saturate(165%) brightness(1.04);
 
-    --le-sheen: linear-gradient(
+    --folkr-sheen: linear-gradient(
       to bottom,
       rgba(255, 255, 255, 0.42) 0%,
       rgba(255, 255, 255, 0.10) 22%,
       rgba(255, 255, 255, 0.00) 55%
     );
 
-    --le-shadow-sheet: 0 1px 0 rgba(255, 255, 255, 0.75) inset,
+    --folkr-shadow-sheet: 0 1px 0 rgba(255, 255, 255, 0.75) inset,
                        0 0 0 1px rgba(255, 255, 255, 0.22) inset,
                        0 -22px 50px rgba(4, 27, 40, 0.20);
-    --le-shadow-card:  0 1px 0 rgba(255, 255, 255, 0.65) inset,
+    --folkr-shadow-card:  0 1px 0 rgba(255, 255, 255, 0.65) inset,
                        0 0 0 1px rgba(255, 255, 255, 0.18) inset,
                        0 6px 20px -12px rgba(4, 27, 40, 0.22);
   }
@@ -224,59 +224,59 @@
    that only works one way is worse than none. */
 
 :root[data-theme="light"] {
-  --le-paper:      #F3F2EA;
-  --le-surface:    #FBFAF4;
-  --le-sunken:     #DAD7C8;
+  --folkr-paper:      #F3F2EA;
+  --folkr-surface:    #FBFAF4;
+  --folkr-sunken:     #DAD7C8;
 
-  --le-ink:        #09324A;
-  --le-ink-2:      #3C5A6D;
-  --le-ink-3:      #57707F;   /* 4.6:1 on paper. #6B8493 was 3.5:1 — it had never passed. */
+  --folkr-ink:        #09324A;
+  --folkr-ink-2:      #3C5A6D;
+  --folkr-ink-3:      #57707F;   /* 4.6:1 on paper. #6B8493 was 3.5:1 — it had never passed. */
 
-  --le-rule:       #DAD7C8;
-  --le-rule-soft:  #E8E6DB;
+  --folkr-rule:       #DAD7C8;
+  --folkr-rule-soft:  #E8E6DB;
 
-  --le-highlight:    #FFFB08;
-  --le-on-highlight: #09324A;
-  --le-brand:        #4B23C9;
+  --folkr-highlight:    #FFFB08;
+  --folkr-on-highlight: #09324A;
+  --folkr-brand:        #4B23C9;
 
-  --le-com:        #1B6F81;
-  --le-com-soft:   #E2EFF1;
-  --le-biz:        #09324A;
-  --le-biz-soft:   #DEE7ED;
+  --folkr-com:        #1B6F81;
+  --folkr-com-soft:   #E2EFF1;
+  --folkr-biz:        #09324A;
+  --folkr-biz-soft:   #DEE7ED;
 
-  --le-verified:    #15883E;
-  --le-on-verified: #FFFFFF;
+  --folkr-verified:    #15883E;
+  --folkr-on-verified: #FFFFFF;
 
-  --le-good:       #2C7A6B;
-  --le-good-soft:  #AED0C9;
-  --le-warn:       #6B5A00;
-  --le-warn-soft:  #FFFDBF;
-  --le-danger:      #A8372B;
-  --le-danger-soft: #F6E3DF;
+  --folkr-good:       #2C7A6B;
+  --folkr-good-soft:  #AED0C9;
+  --folkr-warn:       #6B5A00;
+  --folkr-warn-soft:  #FFFDBF;
+  --folkr-danger:      #A8372B;
+  --folkr-danger-soft: #F6E3DF;
 
-  --le-accent:    var(--le-ink);
-  --le-on-accent: var(--le-paper);
+  --folkr-accent:    var(--folkr-ink);
+  --folkr-on-accent: var(--folkr-paper);
 
-  --le-track-display: -0.035em;
-  --le-track-tight: -0.02em;
+  --folkr-track-display: -0.035em;
+  --folkr-track-tight: -0.02em;
 
-  --le-shadow: 0 1px 2px rgba(9, 50, 74, 0.05),
+  --folkr-shadow: 0 1px 2px rgba(9, 50, 74, 0.05),
                0 8px 24px -10px rgba(9, 50, 74, 0.18);
 
-  --le-blur:    blur(44px) saturate(190%) brightness(1.06);
-  --le-blur-sm: blur(20px) saturate(165%) brightness(1.04);
+  --folkr-blur:    blur(44px) saturate(190%) brightness(1.06);
+  --folkr-blur-sm: blur(20px) saturate(165%) brightness(1.04);
 
-  --le-sheen: linear-gradient(
+  --folkr-sheen: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0.42) 0%,
     rgba(255, 255, 255, 0.10) 22%,
     rgba(255, 255, 255, 0.00) 55%
   );
 
-  --le-shadow-sheet: 0 1px 0 rgba(255, 255, 255, 0.75) inset,
+  --folkr-shadow-sheet: 0 1px 0 rgba(255, 255, 255, 0.75) inset,
                      0 0 0 1px rgba(255, 255, 255, 0.22) inset,
                      0 -22px 50px rgba(4, 27, 40, 0.20);
-  --le-shadow-card:  0 1px 0 rgba(255, 255, 255, 0.65) inset,
+  --folkr-shadow-card:  0 1px 0 rgba(255, 255, 255, 0.65) inset,
                      0 0 0 1px rgba(255, 255, 255, 0.18) inset,
                      0 6px 20px -12px rgba(4, 27, 40, 0.22);
 }
@@ -284,61 +284,61 @@
 /* Dark chosen explicitly. Identical to :root, and repeated so it wins back
    over the light media query on a system set to light. */
 :root[data-theme="dark"] {
-  --le-paper:      #0B0B0C;
-  --le-surface:    #151518;
-  --le-sunken:     #070708;
+  --folkr-paper:      #0B0B0C;
+  --folkr-surface:    #151518;
+  --folkr-sunken:     #070708;
 
-  --le-ink:        #FFFFFF;
-  --le-ink-2:      #A6A6AF;
-  --le-ink-3:      #82828C;
+  --folkr-ink:        #FFFFFF;
+  --folkr-ink-2:      #A6A6AF;
+  --folkr-ink-3:      #82828C;
 
-  --le-rule:       #27272E;
-  --le-rule-soft:  #1B1B20;
+  --folkr-rule:       #27272E;
+  --folkr-rule-soft:  #1B1B20;
 
-  --le-highlight:    #FFFFFF;
-  --le-on-highlight: #0B0B0C;
+  --folkr-highlight:    #FFFFFF;
+  --folkr-on-highlight: #0B0B0C;
   /* Legible as text as well as usable as a logo fill. #6C3BFF is the truer
      brand violet but only reaches 3.5:1 on this ground, and a token that is
      safe in one use and unreadable in another gets used wrong eventually. */
-  --le-brand:        #8B63FF;
+  --folkr-brand:        #8B63FF;
 
-  --le-com:        #7FD8FF;
-  --le-com-soft:   #10222C;
-  --le-biz:        #FFB27F;
-  --le-biz-soft:   #2A1C12;
+  --folkr-com:        #7FD8FF;
+  --folkr-com-soft:   #10222C;
+  --folkr-biz:        #FFB27F;
+  --folkr-biz-soft:   #2A1C12;
 
-  --le-verified:    #2BD46E;
-  --le-on-verified: #05270F;
+  --folkr-verified:    #2BD46E;
+  --folkr-on-verified: #05270F;
 
-  --le-good:       #2BD46E;
-  --le-good-soft:  #0E2A1A;
-  --le-warn:       #FFD84D;
-  --le-warn-soft:  #2A2410;
-  --le-danger:      #FF6B5E;
-  --le-danger-soft: #2B1413;
+  --folkr-good:       #2BD46E;
+  --folkr-good-soft:  #0E2A1A;
+  --folkr-warn:       #FFD84D;
+  --folkr-warn-soft:  #2A2410;
+  --folkr-danger:      #FF6B5E;
+  --folkr-danger-soft: #2B1413;
 
-  --le-accent:    var(--le-highlight);
-  --le-on-accent: var(--le-on-highlight);
+  --folkr-accent:    var(--folkr-highlight);
+  --folkr-on-accent: var(--folkr-on-highlight);
 
-  --le-track-display: -0.04em;
-  --le-track-tight: -0.022em;
+  --folkr-track-display: -0.04em;
+  --folkr-track-tight: -0.022em;
 
-  --le-shadow: 0 1px 2px rgba(0, 0, 0, 0.6),
+  --folkr-shadow: 0 1px 2px rgba(0, 0, 0, 0.6),
                0 10px 30px -12px rgba(0, 0, 0, 0.8);
 
-  --le-blur:    blur(44px) saturate(150%);
-  --le-blur-sm: blur(20px) saturate(135%);
+  --folkr-blur:    blur(44px) saturate(150%);
+  --folkr-blur-sm: blur(20px) saturate(135%);
 
-  --le-sheen: linear-gradient(
+  --folkr-sheen: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0.07) 0%,
     rgba(255, 255, 255, 0.02) 30%,
     rgba(255, 255, 255, 0.00) 60%
   );
 
-  --le-shadow-sheet: 0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+  --folkr-shadow-sheet: 0 0 0 1px rgba(255, 255, 255, 0.08) inset,
                      0 -22px 60px rgba(0, 0, 0, 0.55);
-  --le-shadow-card:  0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+  --folkr-shadow-card:  0 0 0 1px rgba(255, 255, 255, 0.06) inset,
                      0 6px 24px -14px rgba(0, 0, 0, 0.7);
 }
 

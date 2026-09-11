@@ -1,11 +1,11 @@
 import { Component, Prop, State, Event, EventEmitter, h, Host, Listen } from '@stencil/core';
-import type { Post, EventPost, RequestPost, OfferPost, Thread } from '@le/shared';
+import type { Post, EventPost, RequestPost, OfferPost, Thread } from '@folkr/shared';
 import {
   formatDistance, formatWhen, formatRange, formatDailyRun, formatWeekly, untilOf,
   requiresLicence, isSaved, toggleSave, lifecycle,
   threadsOn, threadFor, addReply, canSeeContact, contactHint, updateLocalPost,
   imageFor,
-} from '@le/shared';
+} from '@folkr/shared';
 
 /**
  * The full post, opened by tapping a card.
@@ -35,8 +35,8 @@ function authorProof(a: { idVerified: boolean; phoneVerified?: boolean }): strin
 }
 
 @Component({
-  tag: 'le-post-detail',
-  styleUrl: 'le-post-detail.css',
+  tag: 'folkr-post-detail',
+  styleUrl: 'folkr-post-detail.css',
   shadow: true,
 })
 export class LePostDetail {
@@ -107,7 +107,7 @@ export class LePostDetail {
   /** Local copy, so choosing someone re-renders without a round trip. */
   @State() live: Post | null = null;
 
-  @Event({ eventName: 'le:close-post', bubbles: true, composed: true })
+  @Event({ eventName: 'folkr:close-post', bubbles: true, composed: true })
   closePost!: EventEmitter<void>;
 
   /**
@@ -119,17 +119,17 @@ export class LePostDetail {
    * NUMBER — a decision that cannot be made on the device that benefits from
    * it. The server decides, in a guarded UPDATE, and this event only asks.
    */
-  @Event({ eventName: 'le:offer-help', bubbles: true, composed: true })
+  @Event({ eventName: 'folkr:offer-help', bubbles: true, composed: true })
   offerHelpEvent!: EventEmitter<{ postId: string; message: string }>;
 
-  @Event({ eventName: 'le:choose-helper', bubbles: true, composed: true })
+  @Event({ eventName: 'folkr:choose-helper', bubbles: true, composed: true })
   chooseHelperEvent!: EventEmitter<{ postId: string; helperId: string; helperName: string }>;
 
   /** Taking your own post down. The shell asks the server; this only asks. */
-  @Event({ eventName: 'le:delete-post', bubbles: true, composed: true })
+  @Event({ eventName: 'folkr:delete-post', bubbles: true, composed: true })
   deletePostEvent!: EventEmitter<{ postId: string }>;
 
-  @Event({ eventName: 'le:toggle-save', bubbles: true, composed: true })
+  @Event({ eventName: 'folkr:toggle-save', bubbles: true, composed: true })
   toggleSaved!: EventEmitter<{ id: string; saved: boolean }>;
 
   componentWillLoad() {
@@ -337,7 +337,7 @@ export class LePostDetail {
             <span class="person-who">{other}</span>
             {/* Beside the name, because "who is this" is the question being
                 asked at that moment — not after opening the conversation. */}
-            <le-badges idVerified={otherVerified} phoneVerified={otherPhone} size="sm" />
+            <folkr-badges idVerified={otherVerified} phoneVerified={otherPhone} size="sm" />
             {chosen ? <span class="tag">Chosen</span> : null}
             <span class="person-n">{t.messages.length}</span>
           </span>
@@ -581,14 +581,14 @@ export class LePostDetail {
             <header class="head">
               <div class="badges">
                 {p.kind === 'event'
-                  ? <le-badge
+                  ? <folkr-badge
                       tone={p.author.kind === 'business' ? 'biz' : 'com'}
                       label={p.author.kind === 'business' ? 'Venue' : 'Community'}
                     />
                   : null}
-                {p.kind === 'request' ? <le-badge tone="warn" label="Help needed" /> : null}
-                {p.kind === 'offer' ? <le-badge tone="good" label="Service" /> : null}
-                {state === 'ended' ? <le-badge tone="neutral" label="Finished" /> : null}
+                {p.kind === 'request' ? <folkr-badge tone="warn" label="Help needed" /> : null}
+                {p.kind === 'offer' ? <folkr-badge tone="good" label="Service" /> : null}
+                {state === 'ended' ? <folkr-badge tone="neutral" label="Finished" /> : null}
               </div>
             </header>
 
@@ -633,7 +633,7 @@ export class LePostDetail {
                 <span class="who">
                   <span class="name">{p.author.displayName}</span>
                   <span class="sub">
-                    <le-badges
+                    <folkr-badges
                       idVerified={p.author.idVerified}
                       phoneVerified={p.author.phoneVerified === true}
                       size="md"
