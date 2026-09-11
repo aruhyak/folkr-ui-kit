@@ -34,7 +34,7 @@
     "prepare": "stencil build"
   },
   "dependencies": {
-    "@folkr/shared": "github:aruhyak/folkr-shared#v0.23.0"
+    "@folkr/shared": "github:aruhyak/folkr-shared#v0.25.0"
   },
   "devDependencies": {
     "@stencil/core": "^4.22.2",
