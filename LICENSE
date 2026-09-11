@@ -1,24 +1,33 @@
 Copyright (c) 2026 Aruhya Kambampati. All rights reserved.
 
-This repository is publicly visible. It is NOT open source.
+This software, its source code, design, written content and generated artwork
+are the property of Aruhya Kambampati.
 
-No licence is granted to any person to use, copy, modify, merge, publish,
-distribute, sublicense, or sell any part of this software, in source or binary
-form, whether or not modified.
+No permission is granted to copy, modify, distribute, publish, sublicense or
+make derivative works of any part of this repository, in whole or in part, by
+any person or organisation, without prior written permission from the copyright
+holder.
 
-Viewing and forking within GitHub, as permitted by the GitHub Terms of Service,
-does not grant any licence to use this code outside of GitHub.
-
-The source is public solely so that the project's own build tooling can resolve
-it as a dependency without credentials. Public visibility is a practical
-decision, not a grant of rights.
-
-For permission to use any part of this software, contact the copyright holder.
+Viewing this repository does not grant any licence. Forking, cloning or
+mirroring it for any purpose other than a permission granted in writing is not
+authorised.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+IMPLIED. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY ARISING FROM THE SOFTWARE OR ITS USE.
+
+--------------------------------------------------------------------------
+
+A note on what this does and does not cover.
+
+Copyright protects the EXPRESSION of an idea — this code, these words, this
+artwork — and it does so automatically from the moment they are written. That
+protection is real and this notice makes the claim explicit.
+
+Copyright does not protect the idea itself. Anyone may build a neighbourhood
+noticeboard; what they may not do is take this implementation of one. Claiming
+otherwise would not be enforceable, and a notice that overreaches is easier to
+dismiss than one that is accurate.
+
+If the concept itself needs protecting, that is a matter for a patent attorney
+or for a written agreement with specific people, not for a licence file.
