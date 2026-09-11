@@ -101,6 +101,9 @@
 
   /* ── type ──────────────────────────────────────────────────────────────── */
   --folkr-display: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
+  /* The wordmark only. Headings stay on Bricolage — a display face used for
+     everything stops being a mark and becomes the body copy. */
+  --folkr-wordmark: "Unbounded", "Bricolage Grotesque", system-ui, sans-serif;
   --folkr-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --folkr-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
