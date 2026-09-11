@@ -100,6 +100,10 @@ export class LePostDetail {
   /** One draft per conversation, keyed by the helper's id. */
   @State() drafts: Record<string, string> = {};
   @State() working = false;
+
+
+  /** Whether the "are you sure" panel is open. */
+  @State() confirmingDelete = false;
   /** Local copy, so choosing someone re-renders without a round trip. */
   @State() live: Post | null = null;
 
@@ -120,6 +124,10 @@ export class LePostDetail {
 
   @Event({ eventName: 'le:choose-helper', bubbles: true, composed: true })
   chooseHelperEvent!: EventEmitter<{ postId: string; helperId: string; helperName: string }>;
+
+  /** Taking your own post down. The shell asks the server; this only asks. */
+  @Event({ eventName: 'le:delete-post', bubbles: true, composed: true })
+  deletePostEvent!: EventEmitter<{ postId: string }>;
 
   @Event({ eventName: 'le:toggle-save', bubbles: true, composed: true })
   toggleSaved!: EventEmitter<{ id: string; saved: boolean }>;
@@ -451,6 +459,62 @@ export class LePostDetail {
     );
   }
 
+  /**
+   * Are you sure?
+   *
+   * A real panel rather than window.confirm, so the wording can say what
+   * actually happens and the safe choice can be the obvious one. Deleting is
+   * not reversible from inside the app, and a native dialog gives you "OK" and
+   * "Cancel" — neither of which tells you which is which at a glance.
+   *
+   * "Keep it" is first and styled as the primary action. The destructive one
+   * has to be chosen deliberately, not landed on by muscle memory.
+   */
+  private renderDeleteConfirm() {
+    if (!this.confirmingDelete) return null;
+    const p = this.current;
+    return (
+      <div class="confirm-scrim" onClick={() => (this.confirmingDelete = false)}>
+        <div
+          class="confirm"
+          role="alertdialog"
+          aria-modal="true"
+          aria-labelledby="confirm-t"
+          onClick={(e: MouseEvent) => e.stopPropagation()}
+        >
+          <p class="confirm-t" id="confirm-t">Delete this post?</p>
+          <p class="confirm-d">
+            “{p.title}” will be taken down and neighbours won’t see it any more.
+            {this.threads.length > 0
+              ? ` ${this.threads.length === 1 ? 'One person has' : `${this.threads.length} people have`} already replied — they'll keep their side of the conversation.`
+              : ''}
+            {' '}This can’t be undone.
+          </p>
+          <div class="confirm-row">
+            <button
+              class="confirm-keep"
+              type="button"
+              onClick={() => (this.confirmingDelete = false)}
+            >
+              Keep it
+            </button>
+            <button
+              class="confirm-del"
+              type="button"
+              disabled={this.working}
+              onClick={() => {
+                this.working = true;
+                this.deletePostEvent.emit({ postId: this.current.id });
+              }}
+            >
+              {this.working ? 'Deleting…' : 'Delete'}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     // Nothing to draw. Rendering null is a visible nothing that the shell can
     // replace; throwing is an invisible nothing that looks like a dead app.
@@ -476,16 +540,40 @@ export class LePostDetail {
             onClick={(e: MouseEvent) => e.stopPropagation()}
           >
             {this.fullPage ? (
-              <button class="back" type="button" onClick={this.close}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
-                Back
-              </button>
+              <div class="page-bar">
+                <button class="back" type="button" onClick={this.close}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M15 18l-6-6 6-6" />
+                  </svg>
+                  Back
+                </button>
+
+                {/* Only on your own post. A bin on somebody else's would be a
+                    button that exists only to be refused. */}
+                {this.isOwner ? (
+                  <button
+                    class="binbtn"
+                    type="button"
+                    aria-label="Delete this post"
+                    title="Delete this post"
+                    onClick={() => (this.confirmingDelete = true)}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M3 6h18" />
+                      <path d="M8 6V4.5A1.5 1.5 0 0 1 9.5 3h5A1.5 1.5 0 0 1 16 4.5V6" />
+                      <path d="M19 6l-.8 13.1a2 2 0 0 1-2 1.9H7.8a2 2 0 0 1-2-1.9L5 6" />
+                      <path d="M10 11v6M14 11v6" />
+                    </svg>
+                  </button>
+                ) : null}
+              </div>
             ) : (
               <div class="grab" aria-hidden="true"></div>
             )}
+
+            {this.renderDeleteConfirm()}
 
             {/* No dismiss control here. Close in the footer does that job, and
                 two dedicated buttons for one action in a sheet this small is

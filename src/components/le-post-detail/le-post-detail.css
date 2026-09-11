@@ -637,3 +637,109 @@ input, textarea, select { font-size: 16px !important; }
   color: var(--le-muted);
   letter-spacing: 0.01em;
 }
+
+/* ── the page bar: back on the left, delete on the right ────────────────── */
+.page-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Quiet until you reach for it. A bin sitting in red at the top of every post
+   you wrote reads as a warning about the post rather than an action you can
+   take, and the thing it does is irreversible enough that it should take a
+   deliberate move to reach. */
+.binbtn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border: none;
+  border-radius: 100px;
+  background: transparent;
+  color: var(--le-muted);
+  cursor: pointer;
+  transition: background 0.14s ease, color 0.14s ease;
+}
+.binbtn svg { width: 20px; height: 20px; display: block; }
+.binbtn:hover {
+  background: color-mix(in srgb, var(--le-danger, #d64545) 12%, transparent);
+  color: var(--le-danger, #d64545);
+}
+.binbtn:focus-visible {
+  outline: 2px solid var(--le-danger, #d64545);
+  outline-offset: 2px;
+}
+
+/* ── are you sure ───────────────────────────────────────────────────────── */
+.confirm-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(10, 20, 26, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.confirm {
+  width: min(100%, 25rem);
+  padding: 22px 22px 18px;
+  border-radius: 18px;
+  background: var(--le-surface);
+  box-shadow: 0 18px 50px -12px rgba(0, 0, 0, 0.45);
+}
+
+.confirm-t {
+  margin: 0 0 8px;
+  font-family: var(--le-display, var(--le-sans));
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--le-fg);
+}
+
+.confirm-d {
+  margin: 0 0 20px;
+  font-family: var(--le-sans);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--le-muted);
+}
+
+.confirm-row { display: flex; gap: 10px; }
+
+.confirm-keep,
+.confirm-del {
+  flex: 1;
+  padding: 13px 16px;
+  border-radius: 12px;
+  font-family: var(--le-sans);
+  /* 16px so iOS Safari does not zoom, same rule as every other control here. */
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* The safe choice is the solid one. Someone tapping without reading should
+   land on keeping the post, not on destroying it. */
+.confirm-keep {
+  border: none;
+  background: var(--le-fg);
+  color: var(--le-bg);
+}
+.confirm-keep:hover { filter: brightness(1.12); }
+
+.confirm-del {
+  border: 1.5px solid var(--le-danger, #d64545);
+  background: transparent;
+  color: var(--le-danger, #d64545);
+}
+.confirm-del:hover:not(:disabled) {
+  background: var(--le-danger, #d64545);
+  color: #fff;
+}
+.confirm-del:disabled { opacity: 0.55; cursor: progress; }
