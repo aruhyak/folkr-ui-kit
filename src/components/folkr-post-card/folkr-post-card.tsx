@@ -39,6 +39,9 @@ export class LePostCard {
 
   @State() saved = false;
 
+  /** Briefly, after the link has gone to the clipboard. */
+  @State() shared = false;
+
   /**
    * Carries the whole post, not just an id.
    *
@@ -67,6 +70,44 @@ export class LePostCard {
     // Trust what persisted, not what we asked for — a save can fail on quota.
     this.saved = toggleSave(this.post.id);
     this.toggleSaved.emit({ id: this.post.id, saved: this.saved });
+  };
+
+  /**
+   * Hand the post's link to whatever the device uses for sharing.
+   *
+   * The share sheet where there is one — that is the whole point on a phone,
+   * because it puts the post one tap from a WhatsApp thread or a group chat.
+   * The clipboard where there is not, which is every desktop browser.
+   *
+   * The link is absolute and built from the page's own origin, not from a
+   * constant: it has to survive being pasted somewhere else, and hardcoding a
+   * host means every link sent from localhost points at localhost.
+   */
+  private onShare = async (e: MouseEvent) => {
+    // The card is itself a button; without this, sharing also opens the post.
+    e.stopPropagation();
+
+    const url = `${location.origin}${location.pathname}#/post?id=${encodeURIComponent(this.post.id)}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: this.post.title, url });
+        return;
+      } catch {
+        /* Dismissing the share sheet rejects, and so does a browser that
+           advertises the API but refuses the payload. Neither is an error
+           worth showing — fall through to the clipboard. */
+      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(url);
+      this.shared = true;
+      setTimeout(() => (this.shared = false), 1800);
+    } catch {
+      // Clipboard access can be refused outright. Say nothing rather than
+      // claiming a copy that did not happen.
+    }
   };
 
   private onKey = (e: KeyboardEvent) => {
@@ -215,28 +256,59 @@ export class LePostCard {
               {this.trustBadges()}
               {claimed ? <folkr-badge tone="neutral" label="Claimed" /> : null}
             </div>
-
-            <button
-              class={{ save: true, on: this.saved }}
-              type="button"
-              aria-pressed={String(this.saved)}
-              aria-label={this.saved ? 'Saved — tap to remove' : 'Save this post'}
-              onClick={this.onSave}
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  d="M6.5 3.5h11a1 1 0 0 1 1 1v15.2a.6.6 0 0 1-.94.5L12 16.4l-5.56 3.8a.6.6 0 0 1-.94-.5V4.5a1 1 0 0 1 1-1Z"
-                  fill={this.saved ? 'currentColor' : 'rgba(9,50,74,0.28)'}
-                  stroke="currentColor"
-                  stroke-width="1.6"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
           </div>
 
           <div class="text">
-            <h3 class="title">{p.title}</h3>
+            <div class="title-row">
+              <h3 class="title">{p.title}</h3>
+              <div class="acts">
+                {/* On the title row, NOT over the cover.
+                    They started as white icons floating on the photograph,
+                    which worked right up until a post had no photograph: the
+                    drawn cover is a pale gradient, and a white icon on it is
+                    invisible — which is most of the feed. Ink on the card
+                    surface reads on every card there is. */}
+                <button
+                  class={{ share: true, on: this.shared }}
+                  type="button"
+                  aria-label={this.shared ? 'Link copied' : 'Share this post'}
+                  title={this.shared ? 'Link copied' : 'Share'}
+                  onClick={this.onShare}
+                >
+                  {this.shared ? (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M5 12.5 10 17.5 19 7" />
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M12 15.5V3.5" />
+                      <path d="M8 7.2 12 3.2l4 4" />
+                      <path d="M5.5 12.5v7a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-7" />
+                    </svg>
+                  )}
+                </button>
+
+                <button
+                  class={{ save: true, on: this.saved }}
+                  type="button"
+                  aria-pressed={String(this.saved)}
+                  aria-label={this.saved ? 'Saved — tap to remove' : 'Save this post'}
+                  onClick={this.onSave}
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M6.5 3.5h11a1 1 0 0 1 1 1v15.2a.6.6 0 0 1-.94.5L12 16.4l-5.56 3.8a.6.6 0 0 1-.94-.5V4.5a1 1 0 0 1 1-1Z"
+                      fill={this.saved ? 'currentColor' : 'none'}
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
             <p class="meta">
               <span class="when">{this.whenLine()}</span>
               <span class="dot" aria-hidden="true">·</span>

@@ -1,75 +1,94 @@
 /* ============================================================
    Design tokens.
 
-   DARK FIRST. The ground is near-black, the type is white, and colour comes
-   almost entirely from photographs and generated covers. One accent does the
-   work of every call to action; everything else is a neutral.
+   ONE design, in two lightnesses. Light is the default and the one the app is
+   drawn for; dark is the same palette with the grounds and the inks swapped,
+   not a different product.
 
-   That restraint is the whole idea. A feed is a wall of other people's images,
-   and every colour the interface adds is a colour competing with them. Give
-   the chrome one voice and the content keeps its own.
+   What both themes share, and what makes them one design:
 
-   Light is a full second theme, not an inversion. Inverting a dark palette
-   produces muddy greys and an accent that glares, so the light side keeps the
-   warm MP213 paper it was built on and swaps the accent for something that
-   works on it.
+     accent  #CF3F1C   the SAME warm orange in both. Every call to action, and
+                       nothing else. An accent that changes with the theme is
+                       two brands wearing one name.
+     neutral           the grounds are black, white and grey. Dark briefly
+                       carried violet in its grounds, on the theory that a
+                       shared hue tied the two themes together. It did not —
+                       it just read as a purple app. The thing that ties them
+                       together is the accent, which is the same in both.
+     violet  #6C3BFF   the brand itself. Used sparingly, and NEVER on a
+                       control: a colour that means "us" cannot also mean
+                       "press this".
 
-     white         #FFFFFF   the one accent
-     near-black    #0B0B0C   ground
-     violet        #6C3BFF   brand, used sparingly and never on a control
-     picket fence  #F3F2EA   the light ground
+   The dark side is not an inversion. Inverting produces muddy greys and an
+   accent that glares, so its grounds are chosen rather than flipped, and the
+   few remaining coloured tokens are re-pitched for it — something told apart
+   at badge size on a dark card is a different problem from telling it apart
+   on a white one.
 
-   Two accents still carry MEANING rather than decoration:
+   Two accents carry MEANING rather than decoration, in both themes:
      com  = individual / community
      biz  = business / venue
    ============================================================ */
 
 :root {
   /* ── grounds ───────────────────────────────────────────────────────────
-     Not pure black. #000 makes every shadow invisible and every edge hard,
-     and on OLED it smears when you scroll. A hair above it keeps depth. */
-  --folkr-paper:      #0B0B0C;
-  --folkr-surface:    #151518;   /* cards, sheets */
-  --folkr-sunken:     #070708;   /* wells, inputs */
+     Neutral, and not pure black. #000 makes every shadow invisible and every
+     edge hard, and on OLED it smears when you scroll — a hair above it keeps
+     depth. Neutral rather than tinted: a tint in the ground is a colour cast
+     over every screen at once, which is the one place it cannot be spent
+     deliberately. */
+  --folkr-paper:      #0E0E10;
+  --folkr-surface:    #1A1A1D;   /* cards, sheets */
+  --folkr-sunken:     #08080A;   /* wells, inputs */
 
   /* ── ink ───────────────────────────────────────────────────────────────
-     Full white for the thing you are reading; two greys below it. Both greys
-     are very slightly cool so they sit with the ground rather than looking
-     like dirty white. */
+     Full white for the thing you are reading; two neutral greys below it. */
   --folkr-ink:        #FFFFFF;
-  --folkr-ink-2:      #A6A6AF;   /* secondary text — 7.4:1 on the ground */
-  --folkr-ink-3:      #82828C;   /* labels, timestamps — 5.2:1 on ground, 4.8:1 on cards */
+  --folkr-ink-2:      #A9A9AF;   /* secondary text — 7.4:1 on the ground */
+  --folkr-ink-3:      #86868D;   /* labels, timestamps — 5.2:1 on ground, 4.8:1 on cards */
 
-  --folkr-rule:       #27272E;
-  --folkr-rule-soft:  #1B1B20;
+  --folkr-rule:       #2A2A2F;
+  --folkr-rule-soft:  #1D1D21;
 
   /* ── the accent ────────────────────────────────────────────────────────
-     White. On a near-black ground nothing is louder, and unlike a colour it
-     never argues with a photograph — which matters when the screen below it is
-     a wall of other people's images.
+     The same orange as the light theme, deliberately. It was white here while
+     light's was yellow — two accents, so the app changed identity with the
+     theme instead of changing lightness.
 
-     A bright accent seemed like the punchy choice and was the wrong one: acid
-     lime on black reads as a warning, clashes with half the covers, and is not
-     how this kind of app actually looks. The restraint IS the style.
+     #CF3F1C rather than a brighter orange in either theme: white on it reaches
+     4.8:1, so a button's own label passes. Brighter oranges look right in a
+     swatch and fail the moment you put text on them, and the version of this
+     that gets shipped is always the one with text on it.
 
      Violet is the brand mark and nothing else. It never appears on a control,
      because a colour that means "us" cannot also mean "press this". */
-  --folkr-highlight:    #FFFFFF;
-  --folkr-on-highlight: #0B0B0C;
+  --folkr-highlight:    #CF3F1C;
+  --folkr-on-highlight: #FFFFFF;
   /* Legible as text as well as usable as a logo fill. #6C3BFF is the truer
      brand violet but only reaches 3.5:1 on this ground, and a token that is
      safe in one use and unreadable in another gets used wrong eventually. */
   --folkr-brand:        #8B63FF;
 
+  /* The two glows on the sign-in and launch grounds. Tokens rather than
+     literals because they were hardcoded dark violet and teal, which on a
+     light paper stopped being a glow and became the background. */
+  --folkr-glow-1: #3C1A0B;
+  --folkr-glow-2: #17171C;
+
   /* ── category accents ──────────────────────────────────────────────────
      These say WHAT something is, so they must be told apart at a glance and
-     at badge size. Cyan and amber sit far enough apart in hue to survive
-     both. The -soft pairs are grounds for tinted pills, mixed from the accent
+     at badge size. Cyan and violet sit far enough apart in hue to survive
+     both, and neither is the orange — a category colour that matches the
+     button colour stops meaning "what this is" and starts looking like
+     something to press. Amber used to hold the biz slot and had exactly that
+     problem once the accent turned orange.
+
+     The -soft pairs are grounds for tinted pills, mixed from their own accent
      so they stay related to it rather than being invented greys. */
-  --folkr-com:        #7FD8FF;
-  --folkr-com-soft:   #10222C;
-  --folkr-biz:        #FFB27F;
-  --folkr-biz-soft:   #2A1C12;
+  --folkr-com:        #6FD2E8;
+  --folkr-com-soft:   #10262E;
+  --folkr-biz:        #B79BFF;
+  --folkr-biz-soft:   #231C3A;
 
   /* ── verification ──────────────────────────────────────────────────────
      Bright green with DARK text on it. White on a green this bright fails
@@ -79,13 +98,17 @@
   --folkr-on-verified: #05270F;
 
   --folkr-good:       #2BD46E;
-  --folkr-good-soft:  #0E2A1A;
+  --folkr-good-soft:  #102A1D;
 
-  --folkr-warn:       #FFD84D;
-  --folkr-warn-soft:  #2A2410;
+  /* Gold, not banana. #FFD84D was a lemon yellow that read as a highlighter
+     pen next to an orange accent, and yellow is the one hue that cannot be
+     dimmed into seriousness. Deep gold still says caution and stays clearly
+     apart from the accent's red-orange. */
+  --folkr-warn:       #D99A2B;
+  --folkr-warn-soft:  #2A2114;
 
   --folkr-danger:      #FF6B5E;
-  --folkr-danger-soft: #2B1413;
+  --folkr-danger-soft: #2E1618;
 
   /* ── semantic aliases ──────────────────────────────────────────────────
      The same colours under the names components actually reach for. These
@@ -149,76 +172,137 @@
                      0 6px 24px -14px rgba(0, 0, 0, 0.7);
 }
 
-/* ── light ────────────────────────────────────────────────────────────────
-   A designed second theme rather than an inversion. The warm MP213 paper is
-   kept, and the accent changes entirely: acid lime on cream is illegible, so
-   the light theme's loudest colour is Banana King, which is what that palette
-   was built around.
+/* ── the launch screen ────────────────────────────────────────────────────
+   Deliberately OUTSIDE both themes. It is the same violet whether the app
+   opens light or dark, because a launch screen is the brand introducing
+   itself, not a preview of somebody's colour preference.
 
-   Applied for anyone whose system asks for light and who has not chosen
-   otherwise; the explicit toggle below overrides it in both directions.
+   This is the one thing the splash cannot be: the same surface as the screen
+   behind it. It was briefly given the theme's own paper and the sign-in
+   page's glows — and it stopped registering as a launch screen at all, since
+   what it then showed was the login page's background with the wordmark on
+   it. A launch screen has to be somewhere you have not been yet.
+
+   The accent orange, at full strength and filling the screen. It was violet
+   first, on the argument that violet means "us" and never appears on a
+   control. True, but it made the one screen everybody sees first the only
+   place the app's actual colour does not appear — and the orange is what
+   people recognise the app by.
+
+   Deeper than the button orange, not the same value: #CF3F1C across a whole
+   screen is a glare, where a 32px button is a signal. Same hue, dropped in
+   lightness, with the brighter orange as the bloom behind the name.
+   ───────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --folkr-splash-bg:   #8A2708;
+  --folkr-splash-tint: #E8571F;
+  --folkr-splash-deep: #4A1204;
+  --folkr-splash-ink:  #FFFFFF;
+}
+
+/* ── light ────────────────────────────────────────────────────────────────
+   The default theme, and the one the app is now designed around.
+
+   Dark was the original direction and it was the wrong one for this app. A
+   noticeboard is read in daylight, on a pavement, by somebody deciding
+   whether to go to a thing — not browsed at night like a gig listing. Every
+   app people already use for exactly this (Eventbrite, Airbnb, Nextdoor) is
+   light, off-white, with one warm accent, and that is not a coincidence:
+   white cards on an off-white ground separate a long list without drawing a
+   single heavy line.
+
+   So this is a designed theme, not an inversion of the dark one. Inverting
+   produces muddy greys and an accent that glares. Three things carry it:
+
+     paper   #F8F7F4   off-white ground, cards sit WHITE on top of it
+     ink     #1B0E35   near-black with violet in it, same family as the mark
+     accent  #CF3F1C   one warm orange, on every call to action and nothing else
+
+   Dark survives as a full second theme for anyone who wants it.
    ───────────────────────────────────────────────────────────────────────── */
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
-    --folkr-paper:      #F3F2EA;
-    --folkr-surface:    #FBFAF4;
-    --folkr-sunken:     #DAD7C8;
+    --folkr-paper:      #F8F7F4;
+    --folkr-surface:    #FFFFFF;
+    --folkr-sunken:     #EFEDE7;
 
-    --folkr-ink:        #09324A;
-    --folkr-ink-2:      #3C5A6D;
-    --folkr-ink-3:      #57707F;   /* 4.6:1 on paper. #6B8493 was 3.5:1 — it had never passed. */
+    /* The ink is a very dark violet, not a grey-black. It is what makes the
+       orange below read as deliberate rather than as a stray warm colour on
+       a neutral page, and it is the same hue family as the wordmark — so the
+       brand stops being a decal sitting on top of the interface. */
+    --folkr-ink:        #1B0E35;
+    --folkr-ink-2:      #524766;   /* 8.6:1 on paper */
+    --folkr-ink-3:      #6E6486;   /* 5.0:1 on paper */
 
-    --folkr-rule:       #DAD7C8;
-    --folkr-rule-soft:  #E8E6DB;
+    --folkr-rule:       #E4E1DA;
+    --folkr-rule-soft:  #EFEDE7;
 
-    --folkr-highlight:    #FFFB08;
-    --folkr-on-highlight: #09324A;
-    --folkr-brand:        #4B23C9;
+    /* One warm accent carries every call to action. Banana King was the old
+       light accent and it could not be a button at all — a yellow that bright
+       has no contrast for its own label, so the primary action had to fall
+       back to plain ink and nothing on the page looked pressable.
 
-    --folkr-com:        #1B6F81;
-    --folkr-com-soft:   #E2EFF1;
-    --folkr-biz:        #09324A;
-    --folkr-biz-soft:   #DEE7ED;
+       #CF3F1C rather than a brighter orange: white on it reaches 4.8:1, so
+       the label on a button actually passes. Brighter oranges look right in a
+       swatch and fail the moment you put text on them. */
+    --folkr-highlight:    #CF3F1C;
+    --folkr-on-highlight: #FFFFFF;
+    --folkr-brand:        #5B2BD6;
+
+    /* The two glows on the sign-in and launch grounds. Tokens rather than
+       literals because they were hardcoded dark violet and teal, which on a
+       light paper stopped being a glow and became the background. */
+    --folkr-glow-1: #FFE7D8;
+    --folkr-glow-2: #EFEDE6;
+
+    /* Teal and violet, far enough apart in hue to be told apart at badge
+       size, and neither one is the accent — a category colour that matches
+       the button colour stops meaning "what this is" and starts looking like
+       something to press. */
+    --folkr-com:        #0F6675;
+    --folkr-com-soft:   #E3F0F2;
+    --folkr-biz:        #5B3AA8;
+    --folkr-biz-soft:   #ECE7F8;
 
     --folkr-verified:    #15883E;
     --folkr-on-verified: #FFFFFF;
 
-    --folkr-good:       #2C7A6B;
-    --folkr-good-soft:  #AED0C9;
-    --folkr-warn:       #6B5A00;
-    --folkr-warn-soft:  #FFFDBF;
-    --folkr-danger:      #A8372B;
-    --folkr-danger-soft: #F6E3DF;
+    --folkr-good:       #15883E;
+    --folkr-good-soft:  #DDF0E3;
+    --folkr-warn:       #7A5A00;
+    --folkr-warn-soft:  #F7EBD6;
+    --folkr-danger:      #B3301C;
+    --folkr-danger-soft: #FAE6E1;
 
-    /* The primary action is the ink itself here. Banana King is a highlight,
-       not a button — a full-width yellow button on cream has no contrast for
-       its own label. */
-    --folkr-accent:    var(--folkr-ink);
-    --folkr-on-accent: var(--folkr-paper);
+    --folkr-accent:    var(--folkr-highlight);
+    --folkr-on-accent: var(--folkr-on-highlight);
 
     --folkr-track-display: -0.035em;
     --folkr-track-tight: -0.02em;
 
-    --folkr-shadow: 0 1px 2px rgba(9, 50, 74, 0.05),
-                 0 8px 24px -10px rgba(9, 50, 74, 0.18);
+    /* Cards sit white on an off-white ground and are separated by a hairline
+       and the faintest lift — not by a heavy shadow. The ground doing the
+       separating is what keeps a long feed calm. */
+    --folkr-shadow: 0 1px 2px rgba(27, 14, 53, 0.05),
+                 0 8px 24px -12px rgba(27, 14, 53, 0.14);
 
-    --folkr-blur:    blur(44px) saturate(190%) brightness(1.06);
-    --folkr-blur-sm: blur(20px) saturate(165%) brightness(1.04);
+    --folkr-blur:    blur(44px) saturate(180%) brightness(1.04);
+    --folkr-blur-sm: blur(20px) saturate(160%) brightness(1.03);
 
     --folkr-sheen: linear-gradient(
       to bottom,
-      rgba(255, 255, 255, 0.42) 0%,
-      rgba(255, 255, 255, 0.10) 22%,
+      rgba(255, 255, 255, 0.55) 0%,
+      rgba(255, 255, 255, 0.14) 22%,
       rgba(255, 255, 255, 0.00) 55%
     );
 
-    --folkr-shadow-sheet: 0 1px 0 rgba(255, 255, 255, 0.75) inset,
-                       0 0 0 1px rgba(255, 255, 255, 0.22) inset,
-                       0 -22px 50px rgba(4, 27, 40, 0.20);
-    --folkr-shadow-card:  0 1px 0 rgba(255, 255, 255, 0.65) inset,
-                       0 0 0 1px rgba(255, 255, 255, 0.18) inset,
-                       0 6px 20px -12px rgba(4, 27, 40, 0.22);
+    --folkr-shadow-sheet: 0 1px 0 rgba(255, 255, 255, 0.9) inset,
+                       0 0 0 1px rgba(27, 14, 53, 0.06) inset,
+                       0 -22px 50px rgba(27, 14, 53, 0.16);
+    --folkr-shadow-card:  0 0 0 1px rgba(27, 14, 53, 0.07) inset,
+                       0 4px 16px -10px rgba(27, 14, 53, 0.18);
   }
 }
 
@@ -227,98 +311,132 @@
    that only works one way is worse than none. */
 
 :root[data-theme="light"] {
-  --folkr-paper:      #F3F2EA;
-  --folkr-surface:    #FBFAF4;
-  --folkr-sunken:     #DAD7C8;
+  --folkr-paper:      #F8F7F4;
+  --folkr-surface:    #FFFFFF;
+  --folkr-sunken:     #EFEDE7;
 
-  --folkr-ink:        #09324A;
-  --folkr-ink-2:      #3C5A6D;
-  --folkr-ink-3:      #57707F;   /* 4.6:1 on paper. #6B8493 was 3.5:1 — it had never passed. */
+  /* The ink is a very dark violet, not a grey-black. It is what makes the
+     orange below read as deliberate rather than as a stray warm colour on
+     a neutral page, and it is the same hue family as the wordmark — so the
+     brand stops being a decal sitting on top of the interface. */
+  --folkr-ink:        #1B0E35;
+  --folkr-ink-2:      #524766;   /* 8.6:1 on paper */
+  --folkr-ink-3:      #6E6486;   /* 5.0:1 on paper */
 
-  --folkr-rule:       #DAD7C8;
-  --folkr-rule-soft:  #E8E6DB;
+  --folkr-rule:       #E4E1DA;
+  --folkr-rule-soft:  #EFEDE7;
 
-  --folkr-highlight:    #FFFB08;
-  --folkr-on-highlight: #09324A;
-  --folkr-brand:        #4B23C9;
+  /* One warm accent carries every call to action. Banana King was the old
+     light accent and it could not be a button at all — a yellow that bright
+     has no contrast for its own label, so the primary action had to fall
+     back to plain ink and nothing on the page looked pressable.
 
-  --folkr-com:        #1B6F81;
-  --folkr-com-soft:   #E2EFF1;
-  --folkr-biz:        #09324A;
-  --folkr-biz-soft:   #DEE7ED;
+     #CF3F1C rather than a brighter orange: white on it reaches 4.8:1, so
+     the label on a button actually passes. Brighter oranges look right in a
+     swatch and fail the moment you put text on them. */
+  --folkr-highlight:    #CF3F1C;
+  --folkr-on-highlight: #FFFFFF;
+  --folkr-brand:        #5B2BD6;
+
+    /* The two glows on the sign-in and launch grounds. Tokens rather than
+       literals because they were hardcoded dark violet and teal, which on a
+       light paper stopped being a glow and became the background. */
+    --folkr-glow-1: #FFE7D8;
+    --folkr-glow-2: #EFEDE6;
+
+  /* Teal and violet, far enough apart in hue to be told apart at badge
+     size, and neither one is the accent — a category colour that matches
+     the button colour stops meaning "what this is" and starts looking like
+     something to press. */
+  --folkr-com:        #0F6675;
+  --folkr-com-soft:   #E3F0F2;
+  --folkr-biz:        #5B3AA8;
+  --folkr-biz-soft:   #ECE7F8;
 
   --folkr-verified:    #15883E;
   --folkr-on-verified: #FFFFFF;
 
-  --folkr-good:       #2C7A6B;
-  --folkr-good-soft:  #AED0C9;
-  --folkr-warn:       #6B5A00;
-  --folkr-warn-soft:  #FFFDBF;
-  --folkr-danger:      #A8372B;
-  --folkr-danger-soft: #F6E3DF;
+  --folkr-good:       #15883E;
+  --folkr-good-soft:  #DDF0E3;
+  --folkr-warn:       #7A5A00;
+  --folkr-warn-soft:  #F7EBD6;
+  --folkr-danger:      #B3301C;
+  --folkr-danger-soft: #FAE6E1;
 
-  --folkr-accent:    var(--folkr-ink);
-  --folkr-on-accent: var(--folkr-paper);
+  --folkr-accent:    var(--folkr-highlight);
+  --folkr-on-accent: var(--folkr-on-highlight);
 
   --folkr-track-display: -0.035em;
   --folkr-track-tight: -0.02em;
 
-  --folkr-shadow: 0 1px 2px rgba(9, 50, 74, 0.05),
-               0 8px 24px -10px rgba(9, 50, 74, 0.18);
+  /* Cards sit white on an off-white ground and are separated by a hairline
+     and the faintest lift — not by a heavy shadow. The ground doing the
+     separating is what keeps a long feed calm. */
+  --folkr-shadow: 0 1px 2px rgba(27, 14, 53, 0.05),
+               0 8px 24px -12px rgba(27, 14, 53, 0.14);
 
-  --folkr-blur:    blur(44px) saturate(190%) brightness(1.06);
-  --folkr-blur-sm: blur(20px) saturate(165%) brightness(1.04);
+  --folkr-blur:    blur(44px) saturate(180%) brightness(1.04);
+  --folkr-blur-sm: blur(20px) saturate(160%) brightness(1.03);
 
   --folkr-sheen: linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.42) 0%,
-    rgba(255, 255, 255, 0.10) 22%,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.14) 22%,
     rgba(255, 255, 255, 0.00) 55%
   );
 
-  --folkr-shadow-sheet: 0 1px 0 rgba(255, 255, 255, 0.75) inset,
-                     0 0 0 1px rgba(255, 255, 255, 0.22) inset,
-                     0 -22px 50px rgba(4, 27, 40, 0.20);
-  --folkr-shadow-card:  0 1px 0 rgba(255, 255, 255, 0.65) inset,
-                     0 0 0 1px rgba(255, 255, 255, 0.18) inset,
-                     0 6px 20px -12px rgba(4, 27, 40, 0.22);
+  --folkr-shadow-sheet: 0 1px 0 rgba(255, 255, 255, 0.9) inset,
+                     0 0 0 1px rgba(27, 14, 53, 0.06) inset,
+                     0 -22px 50px rgba(27, 14, 53, 0.16);
+  --folkr-shadow-card:  0 0 0 1px rgba(27, 14, 53, 0.07) inset,
+                     0 4px 16px -10px rgba(27, 14, 53, 0.18);
 }
 
 /* Dark chosen explicitly. Identical to :root, and repeated so it wins back
    over the light media query on a system set to light. */
 :root[data-theme="dark"] {
-  --folkr-paper:      #0B0B0C;
-  --folkr-surface:    #151518;
-  --folkr-sunken:     #070708;
+  --folkr-paper:      #0E0E10;
+  --folkr-surface:    #1A1A1D;
+  --folkr-sunken:     #08080A;
 
   --folkr-ink:        #FFFFFF;
-  --folkr-ink-2:      #A6A6AF;
-  --folkr-ink-3:      #82828C;
+  --folkr-ink-2:      #A9A9AF;
+  --folkr-ink-3:      #86868D;
 
-  --folkr-rule:       #27272E;
-  --folkr-rule-soft:  #1B1B20;
+  --folkr-rule:       #2A2A2F;
+  --folkr-rule-soft:  #1D1D21;
 
-  --folkr-highlight:    #FFFFFF;
-  --folkr-on-highlight: #0B0B0C;
+  --folkr-highlight:    #CF3F1C;
+  --folkr-on-highlight: #FFFFFF;
   /* Legible as text as well as usable as a logo fill. #6C3BFF is the truer
      brand violet but only reaches 3.5:1 on this ground, and a token that is
      safe in one use and unreadable in another gets used wrong eventually. */
   --folkr-brand:        #8B63FF;
 
-  --folkr-com:        #7FD8FF;
-  --folkr-com-soft:   #10222C;
-  --folkr-biz:        #FFB27F;
-  --folkr-biz-soft:   #2A1C12;
+  /* The two glows on the sign-in and launch grounds. Tokens rather than
+     literals because they were hardcoded dark violet and teal, which on a
+     light paper stopped being a glow and became the background. */
+  --folkr-glow-1: #3C1A0B;
+  --folkr-glow-2: #17171C;
+
+  --folkr-com:        #6FD2E8;
+  --folkr-com-soft:   #10262E;
+  --folkr-biz:        #B79BFF;
+  --folkr-biz-soft:   #231C3A;
 
   --folkr-verified:    #2BD46E;
   --folkr-on-verified: #05270F;
 
   --folkr-good:       #2BD46E;
-  --folkr-good-soft:  #0E2A1A;
-  --folkr-warn:       #FFD84D;
-  --folkr-warn-soft:  #2A2410;
+  --folkr-good-soft:  #102A1D;
+  /* Gold, not banana. #FFD84D was a lemon yellow that read as a highlighter
+     pen next to an orange accent, and yellow is the one hue that cannot be
+     dimmed into seriousness. Deep gold still says caution and stays clearly
+     apart from the accent's red-orange. */
+  --folkr-warn:       #D99A2B;
+  --folkr-warn-soft:  #2A2114;
   --folkr-danger:      #FF6B5E;
-  --folkr-danger-soft: #2B1413;
+  --folkr-danger-soft: #2E1618;
 
   --folkr-accent:    var(--folkr-highlight);
   --folkr-on-accent: var(--folkr-on-highlight);

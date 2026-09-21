@@ -31,17 +31,33 @@
   font-size: 0.85em;
 }
 
-.tone-neutral {
-  background: var(--folkr-sunken, #e7e7e2);
-  color: var(--folkr-ink-3, #6e7480);
-}
+/* ── tones ───────────────────────────────────────────────────────────────
+   Only two of these are still COLOURED, and both earn it.
+
+   A category pill says what kind of post this is — pet care, help needed, a
+   venue. That was teal and amber, so a feed of eight cards opened on four or
+   five competing hues before a word of content, and the one orange that means
+   "you can press this" stopped standing out because everything did. What kind
+   of post it is, the pill already says in words.
+
+   Warn and good keep their colour because they are not categories. Home
+   access is a caution somebody weighs before letting a stranger in, and
+   verified is the trust signal the whole app rests on — those have to be
+   readable without being read.                                            */
+
+.tone-neutral,
 .tone-com {
-  background: var(--folkr-com-soft, #fae6ee);
-  color: var(--folkr-com, #c92c68);
+  background: var(--folkr-sunken, #e7e7e2);
+  color: var(--folkr-ink-2, #6e7480);
 }
+
+/* Business, distinguished by an edge rather than a hue — it still has to be
+   told apart from an individual's post at a glance, and an outline does that
+   without spending a colour on it. */
 .tone-biz {
-  background: var(--folkr-biz-soft, #e4edf9);
-  color: var(--folkr-biz, #1257b0);
+  background: transparent;
+  color: var(--folkr-ink-2, #6e7480);
+  box-shadow: inset 0 0 0 1px var(--folkr-rule, #d8d6cf);
 }
 .tone-warn {
   background: var(--folkr-warn-soft, #f7eedc);

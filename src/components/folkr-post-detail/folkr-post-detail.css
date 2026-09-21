@@ -23,7 +23,7 @@
      the bottom of the sheet off on a phone. */
   height: 100dvh;
   overflow: hidden;
-  background: rgba(9, 50, 74, 0.42);
+  background: rgba(24, 14, 46, 0.42);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   animation: fade 0.16s ease;

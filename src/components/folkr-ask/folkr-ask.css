@@ -21,7 +21,7 @@
   color: var(--folkr-on-highlight);
   cursor: pointer;
   box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset,
-              0 8px 22px -6px rgba(9,50,74,0.55);
+              0 8px 22px -6px rgba(24, 14, 46,0.55);
 }
 .fab svg { width: 24px; height: 24px; }
 .fab:active { transform: scale(0.96); }
@@ -53,7 +53,7 @@
   /* dvh, not vh — vh includes the area behind mobile browser chrome. */
   height: 100dvh;
   overflow: hidden;
-  background: rgba(9, 50, 74, 0.42);
+  background: rgba(24, 14, 46, 0.42);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 }
