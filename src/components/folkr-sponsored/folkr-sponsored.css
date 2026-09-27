@@ -1,0 +1,123 @@
+/* Fixed above the tab bar, for the whole session.
+   This was a card in the feed that scrolled away. Pinned, it earns far more
+   impressions and costs far more goodwill — so everything below is about
+   making it as small and as escapable as a permanent thing can be: one line
+   of text, a real close button, and never taller than it has to be.
+
+   :host is the fixed element, not an inner div. A fixed child of a fragment
+   that itself has a transform or a filter would be positioned against THAT
+   rather than the viewport, and the slot would drift as the page scrolled. */
+:host {
+  position: fixed;
+  left: 0;
+  right: 0;
+  /* Directly on top of the tab bar, never over it. The shell publishes the
+     space the bar occupies; see trackTabbarHeight. */
+  bottom: var(--folkr-tabbar-h, 3.5rem);
+  z-index: 15;
+  display: block;
+  background: var(--folkr-surface);
+  border-top: 1px solid var(--folkr-rule);
+  box-shadow: 0 -6px 20px -14px rgba(24, 14, 46, 0.5);
+}
+
+.slot {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  /* Anchored to the content column on a wide screen, like every other
+     floating thing here, rather than stretching to the window edge. */
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 9px 12px 9px 14px;
+  min-width: 0;
+}
+
+.body {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.tag {
+  align-self: flex-start;
+  color: var(--folkr-ink-3);
+  font-family: var(--folkr-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+/* One line each, truncated. A banner that grows to fit its text is a banner
+   that eats the page on the day somebody writes a long headline. */
+.title, .meta {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  animation: swap 0.34s ease;
+}
+
+.title {
+  font-family: var(--folkr-display);
+  letter-spacing: var(--folkr-track-tight);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--folkr-ink);
+}
+
+.meta {
+  font-size: 0.76rem;
+  color: var(--folkr-ink-3);
+}
+
+/* A real tap target, drawn quietly.
+   36px so a thumb can hit it without aiming — on a permanent banner the close
+   button is the one control that must never be fiddly, because somebody
+   reaching for it is already mildly annoyed. */
+.x {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--folkr-ink-3);
+  cursor: pointer;
+}
+.x svg { width: 15px; height: 15px; }
+.x:hover { color: var(--folkr-ink); }
+.x:focus-visible { outline: 2px solid var(--folkr-accent); outline-offset: 1px; }
+
+.dots {
+  position: absolute;
+  right: 12px;
+  bottom: 4px;
+  display: flex;
+  gap: 4px;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--folkr-rule);
+  transition: background 0.2s ease;
+}
+.dot.on { background: var(--folkr-ink-3); }
+
+/* A fade, not a slide. Something sliding sideways at the bottom of the screen
+   reads as a notification arriving, which is a promise this is not keeping. */
+@keyframes swap {
+  from { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title, .meta { animation: none; }
+}

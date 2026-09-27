@@ -6,3 +6,4 @@ export { LeBadge } from './components/folkr-badge/folkr-badge';
    element, silently and with no error anywhere. */
 export { LeBadges } from './components/folkr-badges/folkr-badges';
 export { LePostCard } from './components/folkr-post-card/folkr-post-card';
+export { LeSponsored } from './components/folkr-sponsored/folkr-sponsored';

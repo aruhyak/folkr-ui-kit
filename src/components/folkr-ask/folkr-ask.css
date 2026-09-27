@@ -13,7 +13,7 @@
      fallback alone puts this button on top of the tab bar — which on a phone
      means it lands on the Handyman tab. max() guarantees bar height plus the
      home indicator no matter what the token says. */
-  bottom: calc(max(var(--folkr-tabbar-h, 0px), 6rem) + 1.1rem);
+  bottom: calc(max(var(--folkr-tabbar-h, 0px), 6rem) + var(--folkr-ad-h, 0px) + 1.1rem);
   right: max(1rem, calc(50% - 17rem + 1rem));
   width: 54px;
   height: 54px;
@@ -38,7 +38,7 @@
   z-index: 30;
   left: 50%;
   transform: translateX(-50%);
-  bottom: calc(max(var(--folkr-tabbar-h, 0px), 6rem) + 4.7rem);
+  bottom: calc(max(var(--folkr-tabbar-h, 0px), 6rem) + var(--folkr-ad-h, 0px) + 4.7rem);
   margin: 0;
   padding: 0.5rem 0.9rem;
   border-radius: var(--folkr-r-pill);
