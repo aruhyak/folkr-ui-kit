@@ -7,7 +7,7 @@
 
    What both themes share, and what makes them one design:
 
-     accent  #CF3F1C   the SAME warm orange in both. Every call to action, and
+     accent  #E24A1B   the SAME warm orange in both. Every call to action, and
                        nothing else. An accent that changes with the theme is
                        two brands wearing one name.
      neutral           the grounds are black, white and grey. Dark briefly
@@ -62,7 +62,7 @@
 
      Violet is the brand mark and nothing else. It never appears on a control,
      because a colour that means "us" cannot also mean "press this". */
-  --folkr-highlight:    #CF3F1C;
+  --folkr-highlight:    #E24A1B;
   --folkr-on-highlight: #FFFFFF;
   /* Legible as text as well as usable as a logo fill. #6C3BFF is the truer
      brand violet but only reaches 3.5:1 on this ground, and a token that is
@@ -217,7 +217,7 @@
 
      paper   #F8F7F4   off-white ground, cards sit WHITE on top of it
      ink     #1B0E35   near-black with violet in it, same family as the mark
-     accent  #CF3F1C   one warm orange, on every call to action and nothing else
+     accent  #E24A1B   one warm orange, on every call to action and nothing else
 
    Dark survives as a full second theme for anyone who wants it.
    ───────────────────────────────────────────────────────────────────────── */
@@ -244,10 +244,11 @@
        has no contrast for its own label, so the primary action had to fall
        back to plain ink and nothing on the page looked pressable.
 
-       #CF3F1C rather than a brighter orange: white on it reaches 4.8:1, so
-       the label on a button actually passes. Brighter oranges look right in a
-       swatch and fail the moment you put text on them. */
-    --folkr-highlight:    #CF3F1C;
+       Brightened from #CF3F1C on request. White on it is about 4.0:1 — under
+       the 4.5 guideline for body text, fine for short bold button labels.
+       #D6441C is the brightest that still clears 4.5:1 if that is ever
+       needed. */
+    --folkr-highlight:    #E24A1B;
     --folkr-on-highlight: #FFFFFF;
     --folkr-brand:        #5B2BD6;
 
@@ -331,10 +332,11 @@
      has no contrast for its own label, so the primary action had to fall
      back to plain ink and nothing on the page looked pressable.
 
-     #CF3F1C rather than a brighter orange: white on it reaches 4.8:1, so
-     the label on a button actually passes. Brighter oranges look right in a
-     swatch and fail the moment you put text on them. */
-  --folkr-highlight:    #CF3F1C;
+     Brightened from #CF3F1C on request. White on it is about 4.0:1 — under
+     the 4.5 guideline for body text, fine for short bold button labels.
+     #D6441C is the brightest that still clears 4.5:1 if that is ever
+     needed. */
+  --folkr-highlight:    #E24A1B;
   --folkr-on-highlight: #FFFFFF;
   --folkr-brand:        #5B2BD6;
 
@@ -406,7 +408,7 @@
   --folkr-rule:       #2A2A2F;
   --folkr-rule-soft:  #1D1D21;
 
-  --folkr-highlight:    #CF3F1C;
+  --folkr-highlight:    #E24A1B;
   --folkr-on-highlight: #FFFFFF;
   /* Legible as text as well as usable as a logo fill. #6C3BFF is the truer
      brand violet but only reaches 3.5:1 on this ground, and a token that is

@@ -96,6 +96,9 @@ export class LePostDetail {
   @Prop() serverPost?: unknown;
 
   @State() saved = false;
+
+  /** Briefly, after the link has gone to the clipboard. */
+  @State() shared = false;
   @State() threads: Thread[] = [];
   /** One draft per conversation, keyed by the helper's id. */
   @State() drafts: Record<string, string> = {};
@@ -253,6 +256,41 @@ export class LePostDetail {
   onKeyDown(e: KeyboardEvent) {
     if (e.key === 'Escape') this.close();
   }
+
+  /**
+   * Hand this post's link to whatever the device uses for sharing.
+   *
+   * The same behaviour as the share button on the card: the native sheet where
+   * there is one, because that is what puts the post one tap from a group
+   * chat, and the clipboard everywhere else.
+   *
+   * The link is absolute and built from the page's own origin — it has to
+   * survive being pasted somewhere else, and a hardcoded host means every link
+   * sent from a laptop points at localhost.
+   */
+  private onShare = async () => {
+    const url = `${location.origin}${location.pathname}#/post?id=${encodeURIComponent(this.post.id)}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: this.post.title, url });
+        return;
+      } catch {
+        /* Dismissing the sheet rejects, and so does a browser that advertises
+           the API and then refuses the payload. Neither is worth reporting —
+           fall through to the clipboard. */
+      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(url);
+      this.shared = true;
+      setTimeout(() => (this.shared = false), 1800);
+    } catch {
+      // Clipboard access can be refused outright. Say nothing rather than
+      // claiming a copy that did not happen.
+    }
+  };
 
   private close = () => this.closePost.emit();
 
@@ -683,6 +721,31 @@ export class LePostDetail {
                   />
                 </svg>
                 {this.saved ? 'Saved' : 'Save'}
+              </button>
+              {/* Share sits between saving and leaving: all three are things
+                  you do WITH the post rather than ways into it. People send
+                  these to each other, and until now the only way to was to
+                  copy the address bar. */}
+              <button
+                class={{ share: true, on: this.shared }}
+                type="button"
+                aria-label={this.shared ? 'Link copied' : 'Share this post'}
+                onClick={this.onShare}
+              >
+                {this.shared ? (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12.5 10 17.5 19 7" />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 15.5V3.5" />
+                    <path d="M8 7.2 12 3.2l4 4" />
+                    <path d="M5.5 12.5v7a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-7" />
+                  </svg>
+                )}
+                <span class="share-label">{this.shared ? 'Copied' : 'Share'}</span>
               </button>
               <button class="done" type="button" onClick={this.close}>Close</button>
             </footer>

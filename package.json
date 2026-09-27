@@ -2,7 +2,7 @@
   "name": "@folkr/ui-kit",
   "version": "0.1.0",
   "private": false,
-  "description": "Stencil design system for Local Events \u2014 tokens, badges, post card",
+  "description": "Stencil design system for Local Events — tokens, badges, post card",
   "license": "UNLICENSED",
   "type": "module",
   "main": "./dist/components/index.js",
@@ -34,7 +34,7 @@
     "prepare": "stencil build"
   },
   "dependencies": {
-    "@folkr/shared": "github:aruhyak/folkr-shared#v0.26.0"
+    "@folkr/shared": "github:aruhyak/folkr-shared#v0.28.0"
   },
   "devDependencies": {
     "@stencil/core": "^4.22.2",

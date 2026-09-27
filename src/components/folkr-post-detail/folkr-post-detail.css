@@ -174,7 +174,7 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: var(--folkr-com);
+  background: var(--folkr-accent);
   color: var(--folkr-paper);
   font-weight: 700;
   font-size: 0.9rem;
@@ -223,6 +223,7 @@
 }
 
 .save,
+.share,
 .done {
   flex: 1 1 0;
   min-width: 0;
@@ -239,6 +240,7 @@
   transition: transform 0.12s ease, background 0.15s ease;
 }
 .save:active,
+.share:active,
 .done:active { transform: scale(0.98); }
 
 .save {
@@ -252,6 +254,28 @@
   color: var(--folkr-on-highlight);
 }
 .bm { width: 17px; height: 17px; flex: none; }
+.share svg { width: 17px; height: 17px; flex: none; }
+
+/* The quiet middle of the three. Save can become the accent once it is on and
+   Close is the ink, so Share stays outlined — three filled pills in a row
+   would give a post three equally loud things to do and no obvious one. */
+.share {
+  border: 1px solid var(--folkr-rule);
+  background: color-mix(in srgb, var(--folkr-paper) 80%, transparent);
+  color: var(--folkr-ink);
+}
+
+/* Green for the copied tick, not the accent: the accent means "press this",
+   and this is reporting that something already happened. */
+.share.on { color: var(--folkr-verified); border-color: var(--folkr-verified); }
+
+/* Three buttons on one line is tight on a small phone, and the label is the
+   part that can go without losing anything — the icons are unambiguous and
+   each button keeps its aria-label. */
+@media (max-width: 22rem) {
+  .share { flex: 0 0 auto; padding: 0.7rem 0.95rem; }
+  .share-label { display: none; }
+}
 
 .done {
   border: none;
@@ -260,7 +284,8 @@
 }
 
 .save:focus-visible,
-.done:focus-visible { outline: 2px solid var(--folkr-com); outline-offset: 2px; }
+.share:focus-visible,
+.done:focus-visible { outline: 2px solid var(--folkr-accent); outline-offset: 2px; }
 
 /* iOS Safari zooms the whole page when a control under 16px takes focus and
    never zooms back out. No text fields here, but the floor costs nothing and
@@ -357,7 +382,7 @@ input, textarea, select { font-size: 16px !important; }
   cursor: pointer;
 }
 .pick:hover { background: var(--folkr-highlight); border-color: transparent; color: var(--folkr-on-highlight); }
-.pick:focus-visible { outline: 2px solid var(--folkr-com); outline-offset: 2px; }
+.pick:focus-visible { outline: 2px solid var(--folkr-accent); outline-offset: 2px; }
 
 .offer { display: flex; flex-direction: column; gap: 0.5rem; min-width: 0; }
 
@@ -376,8 +401,8 @@ input, textarea, select { font-size: 16px !important; }
 }
 .offer-in:focus {
   outline: none;
-  border-color: var(--folkr-com);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--folkr-com) 18%, transparent);
+  border-color: var(--folkr-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--folkr-accent) 18%, transparent);
 }
 
 .offer-btn {
@@ -393,7 +418,7 @@ input, textarea, select { font-size: 16px !important; }
   cursor: pointer;
 }
 .offer-btn:disabled { opacity: 0.45; cursor: not-allowed; }
-.offer-btn:focus-visible { outline: 2px solid var(--folkr-com); outline-offset: 2px; }
+.offer-btn:focus-visible { outline: 2px solid var(--folkr-accent); outline-offset: 2px; }
 
 /* ── conversations ───────────────────────────────────────────────────────── */
 
@@ -461,7 +486,7 @@ input, textarea, select { font-size: 16px !important; }
 }
 .back svg { width: 17px; height: 17px; }
 .back:hover { background: var(--folkr-sunken); color: var(--folkr-ink); }
-.back:focus-visible { outline: 2px solid var(--folkr-com); outline-offset: 2px; }
+.back:focus-visible { outline: 2px solid var(--folkr-accent); outline-offset: 2px; }
 
 /* Edge to edge. The picture running into the page margins is most of what
    separates a page from a card with a big image on it. */
@@ -557,7 +582,7 @@ input, textarea, select { font-size: 16px !important; }
   color: inherit;
 }
 .person-open:hover { background: color-mix(in srgb, var(--folkr-ink) 4%, transparent); }
-.person-open:focus-visible { outline: 2px solid var(--folkr-com); outline-offset: -2px; }
+.person-open:focus-visible { outline: 2px solid var(--folkr-accent); outline-offset: -2px; }
 
 .person-top {
   display: flex;

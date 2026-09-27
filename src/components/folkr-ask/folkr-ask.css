@@ -7,7 +7,14 @@
 .fab {
   position: fixed;
   z-index: 20;
-  bottom: calc(var(--folkr-tabbar-h, 3.5rem) + 1rem);
+  /* The floor matters.
+     --folkr-tabbar-h is measured and published by the shell, so if it is ever
+     missing, stale, or measured before the bar has its safe-area padding, the
+     fallback alone puts this button on top of the tab bar — which on a phone
+     means it lands on the Handyman tab. max() guarantees bar height plus the
+     home indicator no matter what the token says. */
+  bottom: calc(max(var(--folkr-tabbar-h, 0px), 3.5rem + env(safe-area-inset-bottom))
+                + 1.1rem);
   right: max(1rem, calc(50% - 17rem + 1rem));
   width: 54px;
   height: 54px;
@@ -32,7 +39,7 @@
   z-index: 30;
   left: 50%;
   transform: translateX(-50%);
-  bottom: calc(var(--folkr-tabbar-h, 3.5rem) + 4.6rem);
+  bottom: calc(max(var(--folkr-tabbar-h, 0px), 3.5rem + env(safe-area-inset-bottom)) + 4.7rem);
   margin: 0;
   padding: 0.5rem 0.9rem;
   border-radius: var(--folkr-r-pill);
@@ -101,8 +108,8 @@
 }
 .in:focus {
   outline: none;
-  border-color: var(--folkr-com);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--folkr-com) 18%, transparent);
+  border-color: var(--folkr-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--folkr-accent) 18%, transparent);
 }
 .area { resize: vertical; line-height: 1.5; }
 
@@ -147,7 +154,7 @@
   color: var(--folkr-ink);
 }
 .r input:focus { outline: none; }
-.r:focus-within { background: color-mix(in srgb, var(--folkr-com) 9%, transparent); }
+.r:focus-within { background: color-mix(in srgb, var(--folkr-accent) 9%, transparent); }
 .arrow {
   display: grid;
   place-items: center;
@@ -175,8 +182,8 @@
   color: var(--folkr-ink);
   cursor: pointer;
 }
-.toggle.on { border-color: var(--folkr-com); background: color-mix(in srgb, var(--folkr-com) 10%, transparent); }
-.toggle:focus-visible { outline: 2px solid var(--folkr-com); outline-offset: 2px; }
+.toggle.on { border-color: var(--folkr-accent); background: color-mix(in srgb, var(--folkr-accent) 10%, transparent); }
+.toggle:focus-visible { outline: 2px solid var(--folkr-accent); outline-offset: 2px; }
 .box {
   flex: none;
   display: grid;
@@ -188,7 +195,7 @@
   font-size: 0.75rem;
   font-weight: 800;
 }
-.toggle.on .box { background: var(--folkr-com); border-color: transparent; color: var(--folkr-paper); }
+.toggle.on .box { background: var(--folkr-accent); border-color: transparent; color: var(--folkr-paper); }
 
 
 .err {
