@@ -15,9 +15,8 @@
      the whole window and the banner lined up with nothing above it.
      min() keeps it automatic: the screen on a phone, the column on a
      desktop, with no breakpoint. */
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(46rem, 100vw);
+  left: var(--folkr-col-x, 0px);
+  width: var(--folkr-col-w, min(46rem, 100vw));
   /* Directly on top of the tab bar, never over it. The shell publishes the
      space the bar occupies; see trackTabbarHeight. */
   bottom: var(--folkr-tabbar-h, 6rem);
