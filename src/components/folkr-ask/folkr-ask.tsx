@@ -86,7 +86,23 @@ export class LeAsk {
   private close = () => { this.open = false; this.error = ''; };
 
   private set<K extends keyof typeof this.draft>(k: K, v: (typeof this.draft)[K]) {
-    this.draft = { ...this.draft, [k]: v };
+    const next = { ...this.draft, [k]: v };
+
+    /* Drag the last day along with the first.
+       min={d.from} makes the browser REFUSE an earlier date; it does not
+       change one that is already there. So moving From past To left a range
+       that reads backwards — "needed 20 Oct to 12 Oct" — and stayed that way
+       until submit refused it. The field should not sit there wrong while
+       somebody fills in the rest of the form.
+
+       Moved to match rather than cleared: a one-day job is the common case,
+       so From is usually the right answer for To as well, and blanking a
+       field somebody already filled in is its own small insult. */
+    if (k === 'from' && next.to && next.to < (v as string)) {
+      next.to = v as string;
+    }
+
+    this.draft = next;
   }
 
   private submit = () => {

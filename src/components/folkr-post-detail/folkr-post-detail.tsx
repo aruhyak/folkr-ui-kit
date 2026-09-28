@@ -136,8 +136,20 @@ export class LePostDetail {
   toggleSaved!: EventEmitter<{ id: string; saved: boolean }>;
 
   componentWillLoad() {
-    this.saved = isSaved(this.post.id);
-    this.live = this.post;
+    /* Guarded, because render() already is.
+       render() returns null when there is no post — a deliberate "degrade,
+       do not detonate". This ran FIRST and read this.post.id unguarded, so a
+       missing post threw at mount and render never got its chance. Stencil
+       swallows that: the element mounts, draws nothing, and is
+       indistinguishable from a page that failed to load.
+
+       A component cannot tolerate a missing prop in one lifecycle method and
+       insist on it in another. */
+    const p = this.current;
+    if (p) {
+      this.saved = isSaved(p.id);
+      this.live = p;
+    }
     this.load();
   }
 
@@ -182,7 +194,7 @@ export class LePostDetail {
     // with nothing in the console pointing here — a missing required prop
     // should degrade, not detonate.
     if (!this.current) { this.threads = []; return; }
-    const all = threadsOn(this.post.id);
+    const all = threadsOn(this.current.id);
     this.threads = this.isOwner
       ? all
       : all.filter((t) => t.helperId === this.viewerId);
@@ -301,8 +313,14 @@ export class LePostDetail {
     this.toggleSaved.emit({ id: this.post.id, saved: this.saved });
   };
 
+  /* All three of these read `current`, not `post`.
+     render() guards on `current` — which falls back through serverPost, then
+     live, then post — and then called helpers that read `post` directly. So a
+     post that arrived only from the server passed the guard and threw one
+     line later, inside a render Stencil catches silently: the element mounts,
+     draws nothing, and looks exactly like a page that failed to load. */
   private whenLine(): string | null {
-    const p = this.post;
+    const p = this.current;
     if (p.kind === 'event') {
       const e = p as EventPost;
       const until = untilOf(e.rrule);
@@ -318,7 +336,7 @@ export class LePostDetail {
   }
 
   private priceLine(): string | null {
-    const p = this.post;
+    const p = this.current;
     if (p.kind === 'request') {
       const r = p as RequestPost;
       return r.budget ? `Budget $${r.budget}` : null;
@@ -333,7 +351,7 @@ export class LePostDetail {
 
   /** Only offers state availability, and only they have it to state. */
   private availability(): string | null {
-    return this.post.kind === 'offer' ? (this.post as OfferPost).availability : null;
+    return this.current.kind === 'offer' ? (this.current as OfferPost).availability : null;
   }
 
 
@@ -354,7 +372,18 @@ export class LePostDetail {
    * post summarises and the talking happens on its own page.
    */
   private renderPerson(t: Thread, canChoose: boolean, chosen: boolean) {
-    const last = t.last;
+    /* Derive it if it is missing.
+       A Thread arrives two ways — built locally, or parsed from JSON — and
+       the server was not sending `last` even though the type promised it. So
+       this read undefined.authorId and threw inside a render Stencil
+       swallows: the post page went blank, but only for a post that had a
+       conversation on it, which is why it looked random.
+
+       The server sends it now. This no longer trusts that it will: the last
+       message IS the last element of messages, and computing it here costs
+       nothing next to a page that renders nothing. */
+    const last = t.last ?? t.messages?.[t.messages.length - 1];
+    if (!last) return null;
     const mine = last.authorId === this.viewerId;
     // On your OWN post the other party is the helper. On someone else's, the
     // helper is you — so the person to name is the poster. Without this it
@@ -553,7 +582,42 @@ export class LePostDetail {
     );
   }
 
+  /**
+   * Say what went wrong instead of drawing nothing.
+   *
+   * Stencil catches whatever a render throws and leaves the element empty, so
+   * a single bad property read anywhere below produces a blank page, no
+   * error on screen, and nothing in the console pointing here. That is how
+   * this bug stayed invisible across several attempts to find it.
+   *
+   * The detail is shown rather than logged because the people hitting it are
+   * on phones, where there is no console to open.
+   */
   render() {
+    try {
+      return this.draw();
+    } catch (err) {
+      console.error('FOLKR · post detail failed to draw', err, { id: (this.current as Post | undefined)?.id });
+      return (
+        <Host class={{ page: this.fullPage }}>
+          <div class="scrim">
+            <div class="sheet">
+              <div class="page-bar">
+                <button class="back" type="button" onClick={this.close}>Back</button>
+              </div>
+              <div class="broke">
+                <p class="broke-t">This post didn’t draw</p>
+                <p class="broke-d">A bug, not something you did.</p>
+                <pre class="broke-x">{err instanceof Error ? `${err.name}: ${err.message}` : String(err)}</pre>
+              </div>
+            </div>
+          </div>
+        </Host>
+      );
+    }
+  }
+
+  private draw() {
     // Nothing to draw. Rendering null is a visible nothing that the shell can
     // replace; throwing is an invisible nothing that looks like a dead app.
     if (!this.current) return null;

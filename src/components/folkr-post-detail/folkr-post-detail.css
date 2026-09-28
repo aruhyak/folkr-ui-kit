@@ -768,3 +768,28 @@ input, textarea, select { font-size: 16px !important; }
   color: #fff;
 }
 .confirm-del:disabled { opacity: 0.55; cursor: progress; }
+
+/* Shown when the render throws. Deliberately plain: this is a bug report, not
+   a designed state, and it exists so the message reaches somebody on a phone
+   who has no console to open. */
+.broke { padding: 2.5rem 1.2rem; text-align: center; }
+.broke-t {
+  margin: 0 0 6px;
+  font-family: var(--folkr-display);
+  font-size: 1.15rem;
+  font-weight: 740;
+  color: var(--folkr-ink);
+}
+.broke-d { margin: 0 0 14px; font-size: 0.9rem; color: var(--folkr-ink-2); }
+.broke-x {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--folkr-sunken);
+  color: var(--folkr-danger);
+  font-family: var(--folkr-mono);
+  font-size: 11px;
+  text-align: left;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
