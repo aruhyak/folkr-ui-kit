@@ -9,11 +9,18 @@
    rather than the viewport, and the slot would drift as the page scrolled. */
 :host {
   position: fixed;
-  left: 0;
-  right: 0;
+  /* Matched to the shell, which is max-width:46rem centred. A fixed element
+     is taken OUT of the document and positioned against the viewport, so it
+     cannot inherit that the way everything else does — left:0/right:0 spanned
+     the whole window and the banner lined up with nothing above it.
+     min() keeps it automatic: the screen on a phone, the column on a
+     desktop, with no breakpoint. */
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(46rem, 100vw);
   /* Directly on top of the tab bar, never over it. The shell publishes the
      space the bar occupies; see trackTabbarHeight. */
-  bottom: var(--folkr-tabbar-h, 3.5rem);
+  bottom: var(--folkr-tabbar-h, 6rem);
   z-index: 15;
   display: block;
   background: var(--folkr-surface);
@@ -25,10 +32,7 @@
   display: flex;
   align-items: center;
   gap: 11px;
-  /* Anchored to the content column on a wide screen, like every other
-     floating thing here, rather than stretching to the window edge. */
-  max-width: 34rem;
-  margin: 0 auto;
+  /* Fills the bar, which is already the shell's width. */
   padding: 9px 12px 9px 14px;
   min-width: 0;
 }
