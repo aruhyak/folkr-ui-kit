@@ -32,8 +32,11 @@
   display: flex;
   align-items: center;
   gap: 11px;
-  /* Fills the bar, which is already the shell's width. */
-  padding: 9px 12px 9px 14px;
+  /* 1rem to match .stage, so the banner's text starts on the same vertical
+     line as every card above it. It was 14px — close enough to look like a
+     mistake rather than a margin, which is exactly how a 2px difference
+     reads: not spacious, just misaligned. */
+  padding: 9px 1rem;
   min-width: 0;
 }
 
