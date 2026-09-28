@@ -19,8 +19,17 @@ import { Component, Element, Host, State, Prop, h } from '@stencil/core';
  * turned off deliberately; the default is permissive.
  */
 const SLOTS: ReadonlyArray<{ name: string; line: string }> = [
-  { name: 'Ad 1', line: 'Placeholder · rotates every 5 seconds' },
-  { name: 'Ad 2', line: 'Placeholder · close it and it returns in 5 minutes' },
+  /* Short on purpose.
+     These lines were long enough to truncate on a phone, which reads as text
+     being cut off rather than as an ellipsis doing its job — and a
+     PLACEHOLDER that looks broken tells you nothing about whether the real
+     thing will fit.
+
+     One line is all a banner this size has. A real advertiser gets the same
+     budget, so the dummy copy should demonstrate that rather than overflow
+     it. */
+  { name: 'Ad 1', line: 'Sponsored placeholder' },
+  { name: 'Ad 2', line: 'Sponsored placeholder' },
 ];
 
 
