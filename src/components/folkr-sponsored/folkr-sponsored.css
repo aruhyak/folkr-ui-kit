@@ -35,7 +35,16 @@
      line as every card above it. It was 14px — close enough to look like a
      mistake rather than a margin, which is exactly how a 2px difference
      reads: not spacious, just misaligned. */
-  padding: 9px 1rem;
+  /* The home indicator sits inside the bottom of the screen, and this bar is
+     pinned there — so on Messages, where the tab bar is hidden and this sits
+     at bottom:0, the indicator was drawn straight over the text. The tab bar
+     carries the same inset when it is present; this is the same guarantee for
+     when it is not.
+
+     max(), not a sum: env() is 0 on a device with no home indicator AND in
+     every desktop browser, so a bare addition looks right everywhere it is
+     tested and clips on the one device it matters on. */
+  padding: 9px 1rem max(9px, env(safe-area-inset-bottom));
   min-width: 0;
 }
 

@@ -18,19 +18,21 @@ import { Component, Element, Host, State, Prop, h } from '@stencil/core';
  * AdSense calls it Blocking controls, and the sensitive categories have to be
  * turned off deliberately; the default is permissive.
  */
-const SLOTS: ReadonlyArray<{ name: string; line: string }> = [
-  /* Short on purpose.
-     These lines were long enough to truncate on a phone, which reads as text
-     being cut off rather than as an ellipsis doing its job — and a
-     PLACEHOLDER that looks broken tells you nothing about whether the real
-     thing will fit.
-
-     One line is all a banner this size has. A real advertiser gets the same
-     budget, so the dummy copy should demonstrate that rather than overflow
-     it. */
-  { name: 'Ad 1', line: 'Sponsored placeholder' },
-  { name: 'Ad 2', line: 'Sponsored placeholder' },
-];
+/**
+ * The ads to show. EMPTY until there are real ones.
+ *
+ * This held two dummy entries so the slot could be designed and reviewed, and
+ * a placeholder that ships is just an advert for nothing: it takes a strip off
+ * every screen, invites a tap that goes nowhere, and tells the first people
+ * using this that the app is already selling to them.
+ *
+ * The component renders nothing while this is empty and publishes --folkr-ad-h
+ * as 0, so the page reclaims the space rather than leaving a gap. Put entries
+ * back — or feed them from a server — and the slot returns exactly as
+ * designed, with the rotation, the dismissal and the five-minute return all
+ * still wired up.
+ */
+const SLOTS: ReadonlyArray<{ name: string; line: string }> = [];
 
 
 
@@ -161,6 +163,8 @@ export class LeSponsored {
 
   private start() {
     this.stop();
+    // Nothing to rotate through, and % 0 is NaN.
+    if (SLOTS.length < 2) return;
     this.timer = window.setInterval(() => {
       if (!this.paused) this.index = (this.index + 1) % SLOTS.length;
     }, this.rotateMs);
@@ -194,7 +198,8 @@ export class LeSponsored {
   private release = () => (this.paused = false);
 
   render() {
-    if (this.gone) return null;
+    // Nothing to show is not an empty bar — it is no bar at all.
+    if (this.gone || SLOTS.length === 0) return null;
     const slot = SLOTS[this.index]!;
 
     return (
