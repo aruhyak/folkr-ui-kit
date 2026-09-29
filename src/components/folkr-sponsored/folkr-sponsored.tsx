@@ -19,20 +19,28 @@ import { Component, Element, Host, State, Prop, h } from '@stencil/core';
  * turned off deliberately; the default is permissive.
  */
 /**
- * The ads to show. EMPTY until there are real ones.
+ * The ads in rotation.
  *
- * This held two dummy entries so the slot could be designed and reviewed, and
- * a placeholder that ships is just an advert for nothing: it takes a strip off
- * every screen, invites a tap that goes nowhere, and tells the first people
- * using this that the app is already selling to them.
+ * Every name here is INVENTED and has to stay that way. An ad asserts a
+ * commercial relationship, so a real trading name in one claims a deal that
+ * does not exist — the Victory Brewing problem again, with worse consequences
+ * than it had in seed data.
  *
- * The component renders nothing while this is empty and publishes --folkr-ad-h
- * as 0, so the page reclaims the space rather than leaving a gap. Put entries
- * back — or feed them from a server — and the slot returns exactly as
- * designed, with the rotation, the dismissal and the five-minute return all
- * still wired up.
+ * Both lines are short on purpose. The bar gives each one line and truncates
+ * past it, and an ellipsis mid-word reads as text being cut off rather than as
+ * a limit being respected. If a real advertiser's copy does not fit here, it
+ * does not fit in the product.
+ *
+ * ALSO: nothing adult, nothing gambling, nothing that would be indefensible
+ * beside a post about a kids' craft session. On a real network that is a
+ * settings step, not a code one — AdSense calls it Blocking controls and
+ * defaults to permissive.
  */
-const SLOTS: ReadonlyArray<{ name: string; line: string }> = [];
+const SLOTS: ReadonlyArray<{ name: string; line: string }> = [
+  { name: 'Marsh Lane Hardware', line: '20% off power tools · 0.9 mi' },
+  { name: 'Kettle & Crumb', line: 'Free coffee before 8am · 1.2 mi' },
+  { name: 'Pinebrook Auto', line: 'Oil change $39 · 2.4 mi' },
+];
 
 
 
